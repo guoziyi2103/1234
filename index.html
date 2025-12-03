@@ -1,56 +1,267 @@
+
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>css-3d旋转</title>
-		<link rel="stylesheet" href="css/index.css" />
-	</head>
-	<body>
-		<!--/*外层最大容器*/-->
-		<div class="wrap">
-	<!--	/*包裹所有元素的容器*/-->
-		<div class="cube">
-			<!--前面图片 -->
-			<div class="out_front">
-				<img src="img/1.jpg"  class="pic"/>
-			</div>
-			<!--后面图片 -->
-			<div class="out_back">
-				<img src="img/2.jpg"  class="pic"/>
-			</div>
-			<!--左图片 -->
-			<div class="out_left">
-				<img src="img/3.jpg"  class="pic"/>
-			</div>
-			<div class="out_right">
-				<img src="img/4.jpg"  class="pic"/>
-			</div>
-			<div class="out_top">
-				<img src="img/5.jpg"  class="pic"/>
-			</div>
-			<div class="out_bottom">
-				<img src="img/6.jpg"  class="pic"/>
-			</div>
-			<!--小正方体 --> 
-			<span class="in_front">
-				<img src="img/7.jpg" class="in_pic" />
-			</span>
-			<span class="in_back">
-			     <img src="img/8.jpg" class="in_pic" />
-			</span>
-			<span class="in_left">
-				<img src="img/9.jpg" class="in_pic" />
-			</span>
-			<span class="in_right">
-				<img src="img/10.jpg" class="in_pic" />
-			</span>
-			<span class="in_top">
-				<img src="img/11.jpg" class="in_pic" />
-			</span>
-			<span class="in_bottom">
-				<img src="img/12.jpg" class="in_pic" />
-			</span>
-		</div>
-		</div>
-	</body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亚朵酒店 - 入住指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .welcome-section h2::before {
+            content: "👋";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .welcome-section p {
+            color: #34495e;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .reservation h3::before {
+            content: "📋";
+            margin-right: 10px;
+        }
+        
+        .key-card h3::before {
+            content: "🔑";
+            margin-right: 10px;
+        }
+        
+        .facilities h3::before {
+            content: "🏢";
+            margin-right: 10px;
+        }
+        
+        .contact h3::before {
+            content: "📞";
+            margin-right: 10px;
+        }
+        
+        .info-card p {
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 500;
+            color: #2d3436;
+        }
+        
+        .facility-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .facility-item {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .facility-item .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        
+        .facility-item .name {
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 5px;
+        }
+        
+        .facility-item .detail {
+            color: #546e7a;
+            font-size: 0.9em;
+        }
+        
+        .time-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #a8e6cf 0%, #7fcdbb 100%);
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: #2c3e50;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+        
+        .footer p {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .facility-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>亚朵酒店</h1>
+            <div class="subtitle">欢迎您的入住</div>
+        </div>
+        
+        <div class="content">
+            <div class="welcome-section">
+                <h2>欢迎入住</h2>
+                <p>亲爱的客人，欢迎来到亚朵酒店！我们致力于为您提供舒适温馨的入住体验。如有任何需求，请随时联系我们。</p>
+            </div>
+            
+            <div class="info-card reservation">
+                <h3>预约登记</h3>
+                <p>请问您有预约吗？</p>
+                <p>• <span class="highlight">如有预约</span>：请出示您的有效证件进行登记</p>
+                <p>• <span class="highlight">如无预约</span>：我们可以立即为您办理预约手续</p>
+            </div>
+            
+            <div class="info-card key-card">
+                <h3>房卡使用说明</h3>
+                <p>• <span class="highlight">黑色卡片</span>：房门卡，用于开启您的房间</p>
+                <p>• <span class="highlight">白色卡片</span>：取电卡，请插入房间门口的卡槽内以供电</p>
+                <p>温馨提示：离开房间时请记得带走房卡，取电卡可留在卡槽内</p>
+            </div>
+            
+            <div class="info-card facilities">
+                <h3>酒店设施</h3>
+                <div class="facility-list">
+                    <div class="facility-item">
+                        <div class="icon">🧺</div>
+                        <div class="name">自助洗衣房</div>
+                        <div class="detail">三楼 • 24小时开放</div>
+                        <div class="detail">配备洗衣机和烘干机</div>
+                    </div>
+                    <div class="facility-item">
+                        <div class="icon">🍳</div>
+                        <div class="name">早餐服务</div>
+                        <div class="detail">九楼 • 报房间号用餐</div>
+                        <div class="time-badge">7:00 - 10:30</div>
+                    </div>
+                    <div class="facility-item">
+                        <div class="icon">💪</div>
+                        <div class="name">健身房</div>
+                        <div class="detail">九楼 • 全天开放</div>
+                        <div class="detail">专业健身器材</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-card contact">
+                <h3>联系前台</h3>
+                <p>如需任何帮助或有任何问题，请拨打房间电话：<span class="highlight">0</span></p>
+                <p>我们的前台团队将竭诚为您服务，确保您的入住体验愉快舒适。</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>亚朵酒店 • 用心服务每一位客人</p>
+            <p>祝您入住愉快！</p>
+        </div>
+    </div>
+</body>
 </html>
