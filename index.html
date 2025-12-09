@@ -1,267 +1,530 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>亚朵酒店 - 入住指南</title>
+    <title>Atour Hotel - Travel Guide</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background-color: #f9f7f5;
+            color: #333;
+            line-height: 1.6;
         }
-        
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            padding: 0 20px;
+        }
+        /* 头部样式 */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo img {
+            height: 40px;
+        }
+        .logo h1 {
+            font-size: 22px;
+            color: #2a699d;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 15px;
+        }
+        .lang-btn {
+            background: none;
+            border: 1px solid #2a699d;
+            color: #2a699d;
+            padding: 6px 12px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-btn.active {
+            background-color: #2a699d;
+            color: #fff;
+        }
+        /* 英雄区样式 */
+        .hero {
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1551632436-cbf8dd414306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero-overlay {
+            background-color: rgba(0,0,0,0.5);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+        }
+        /* 内容区样式 */
+        .section {
+            margin-bottom: 60px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2a699d;
+            font-size: 28px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #2a699d;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img {
+            height: 200px;
             overflow: hidden;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
-        
-        .header h1 {
-            font-size: 2.5em;
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 20px;
+            color: #2a699d;
             margin-bottom: 10px;
-            font-weight: 300;
-        }
-        
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 40px 30px;
-        }
-        
-        .welcome-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .welcome-section h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.5em;
             display: flex;
             align-items: center;
+            gap: 8px;
         }
-        
-        .welcome-section h2::before {
-            content: "👋";
-            margin-right: 10px;
-            font-size: 1.2em;
+        .card-title i {
+            font-size: 22px;
         }
-        
-        .welcome-section p {
-            color: #34495e;
-            line-height: 1.8;
-            font-size: 1.1em;
-        }
-        
-        .info-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .info-card h3 {
-            color: #2c3e50;
+        .card-text {
+            color: #666;
             margin-bottom: 15px;
-            font-size: 1.3em;
+        }
+        .card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .detail-item {
             display: flex;
             align-items: center;
+            gap: 10px;
+            font-size: 14px;
         }
-        
-        .reservation h3::before {
-            content: "📋";
-            margin-right: 10px;
+        .detail-item i {
+            color: #2a699d;
         }
-        
-        .key-card h3::before {
-            content: "🔑";
-            margin-right: 10px;
+        /* 底部样式 */
+        footer {
+            background-color: #2a699d;
+            color: #fff;
+            padding: 40px 0;
         }
-        
-        .facilities h3::before {
-            content: "🏢";
-            margin-right: 10px;
-        }
-        
-        .contact h3::before {
-            content: "📞";
-            margin-right: 10px;
-        }
-        
-        .info-card p {
-            color: #5a6c7d;
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-        
-        .highlight {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-weight: 500;
-            color: #2d3436;
-        }
-        
-        .facility-list {
+        .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            gap: 30px;
         }
-        
-        .facility-item {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 15px;
-            border-radius: 10px;
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .footer-logo img {
+            height: 35px;
+        }
+        .footer-logo h3 {
+            font-size: 18px;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #f0e6d6;
+        }
+        .copyright {
             text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
         }
-        
-        .facility-item .icon {
-            font-size: 2em;
-            margin-bottom: 8px;
-        }
-        
-        .facility-item .name {
-            font-weight: 600;
-            color: #1565c0;
-            margin-bottom: 5px;
-        }
-        
-        .facility-item .detail {
-            color: #546e7a;
-            font-size: 0.9em;
-        }
-        
-        .time-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #a8e6cf 0%, #7fcdbb 100%);
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: #2c3e50;
-            font-weight: 500;
-            margin-top: 8px;
-        }
-        
-        .footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-        
-        .footer p {
-            opacity: 0.9;
-        }
-        
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2em;
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero {
+                height: 300px;
             }
-            
-            .content {
-                padding: 25px 20px;
+            .hero h2 {
+                font-size: 28px;
             }
-            
-            .facility-list {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 16px;
+            }
+            .section-title {
+                font-size: 24px;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero {
+                height: 250px;
+            }
+            .hero-overlay {
+                padding: 20px;
+            }
+            .hero h2 {
+                font-size: 24px;
             }
         }
     </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>亚朵酒店</h1>
-            <div class="subtitle">欢迎您的入住</div>
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
+                <h1>Atour Hotel</h1>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
+            </div>
         </div>
-        
-        <div class="content">
-            <div class="welcome-section">
-                <h2>欢迎入住</h2>
-                <p>亲爱的客人，欢迎来到亚朵酒店！我们致力于为您提供舒适温馨的入住体验。如有任何需求，请随时联系我们。</p>
-            </div>
-            
-            <div class="info-card reservation">
-                <h3>预约登记</h3>
-                <p>请问您有预约吗？</p>
-                <p>• <span class="highlight">如有预约</span>：请出示您的有效证件进行登记</p>
-                <p>• <span class="highlight">如无预约</span>：我们可以立即为您办理预约手续</p>
-            </div>
-            
-            <div class="info-card key-card">
-                <h3>房卡使用说明</h3>
-                <p>• <span class="highlight">黑色卡片</span>：房门卡，用于开启您的房间</p>
-                <p>• <span class="highlight">白色卡片</span>：取电卡，请插入房间门口的卡槽内以供电</p>
-                <p>温馨提示：离开房间时请记得带走房卡，取电卡可留在卡槽内</p>
-            </div>
-            
-            <div class="info-card facilities">
-                <h3>酒店设施</h3>
-                <div class="facility-list">
-                    <div class="facility-item">
-                        <div class="icon">🧺</div>
-                        <div class="name">自助洗衣房</div>
-                        <div class="detail">三楼 • 24小时开放</div>
-                        <div class="detail">配备洗衣机和烘干机</div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <h2 class="lang-en">Your Perfect Stay in China</h2>
+            <h2 class="lang-zh" style="display: none;">您在中国的完美停留</h2>
+            <p class="lang-en">Discover food, accommodation, transportation and local experiences around Atour Hotel</p>
+            <p class="lang-zh" style="display: none;">探索亚朵酒店周边的美食、住宿、交通及本地体验</p>
+        </div>
+    </section>
+
+    <!-- 内容区 -->
+    <div class="container">
+        <!-- 住宿 -->
+        <section class="section">
+            <h3 class="section-title lang-en">Accommodation</h3>
+            <h3 class="section-title lang-zh" style="display: none;">住宿</h3>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hotel Room">
                     </div>
-                    <div class="facility-item">
-                        <div class="icon">🍳</div>
-                        <div class="name">早餐服务</div>
-                        <div class="detail">九楼 • 报房间号用餐</div>
-                        <div class="time-badge">7:00 - 10:30</div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-bed"></i> Comfortable Rooms</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-bed"></i> 舒适客房</h4>
+                        <p class="card-text lang-en">Spacious rooms with free Wi-Fi, premium bedding and modern amenities. 24-hour front desk service available.</p>
+                        <p class="card-text lang-zh" style="display: none;">宽敞客房配备免费Wi-Fi、优质床品及现代化设施，24小时前台服务随时待命。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-wifi"></i> Free high-speed Wi-Fi</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-wifi"></i> 免费高速Wi-Fi</div>
+                            <div class="detail-item lang-en"><i class="fas fa-coffee"></i> Complimentary breakfast</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-coffee"></i> 免费早餐</div>
+                            <div class="detail-item lang-en"><i class="fas fa-bath"></i> Private bathroom with shower</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-bath"></i> 带淋浴的私人浴室</div>
+                        </div>
                     </div>
-                    <div class="facility-item">
-                        <div class="icon">💪</div>
-                        <div class="name">健身房</div>
-                        <div class="detail">九楼 • 全天开放</div>
-                        <div class="detail">专业健身器材</div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hotel Amenities">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-concierge-bell"></i> Hotel Services</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-concierge-bell"></i> 酒店服务</h4>
+                        <p class="card-text lang-en">Laundry service, luggage storage, business center and gym. Our partners are ready to assist you anytime.</p>
+                        <p class="card-text lang-zh" style="display: none;">洗衣服务、行李寄存、商务中心及健身房，我们的伙伴随时为您提供协助。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-tshirt"></i> Laundry service (paid)</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-tshirt"></i> 洗衣服务（收费）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-suitcase"></i> Luggage storage (free)</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-suitcase"></i> 行李寄存（免费）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-dumbbell"></i> 24-hour gym access</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-dumbbell"></i> 24小时健身房</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="info-card contact">
-                <h3>联系前台</h3>
-                <p>如需任何帮助或有任何问题，请拨打房间电话：<span class="highlight">0</span></p>
-                <p>我们的前台团队将竭诚为您服务，确保您的入住体验愉快舒适。</p>
+        </section>
+
+        <!-- 美食 -->
+        <section class="section">
+            <h3 class="section-title lang-en">Food & Dining</h3>
+            <h3 class="section-title lang-zh" style="display: none;">美食餐饮</h3>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hotel Breakfast">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-utensils"></i> Hotel Breakfast</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-utensils"></i> 酒店早餐</h4>
+                        <p class="card-text lang-en">International buffet with Chinese and Western dishes, fresh fruits, pastries and hot drinks. Served 6:30-10:00.</p>
+                        <p class="card-text lang-zh" style="display: none;">国际自助早餐包含中西式菜品、新鲜水果、糕点及热饮，供应时间6:30-10:00。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-clock"></i> 6:30 - 10:00 AM</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-clock"></i> 上午6:30 - 10:00</div>
+                            <div class="detail-item lang-en"><i class="fas fa-allergies"></i> Vegetarian options available</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-allergies"></i> 提供素食选择</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Local Restaurants">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-map-marker-alt"></i> Nearby Eateries</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-map-marker-alt"></i> 周边餐饮</h4>
+                        <p class="card-text lang-en">5-minute walk to local restaurants (Chinese, Japanese, Western) and cafes. Popular night market 1km away.</p>
+                        <p class="card-text lang-zh" style="display: none;">步行5分钟可达本地餐厅（中餐、日料、西餐）及咖啡馆，1公里处有热门夜市。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-walking"></i> 5-10 minutes' walk</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-walking"></i> 步行5-10分钟</div>
+                            <div class="detail-item lang-en"><i class="fas fa-credit-card"></i> Card & mobile payment accepted</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-credit-card"></i> 支持刷卡及移动支付</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 交通 -->
+        <section class="section">
+            <h3 class="section-title lang-en">Transportation</h3>
+            <h3 class="section-title lang-zh" style="display: none;">交通</h3>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Public Transport">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-bus"></i> Public Transport</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-bus"></i> 公共交通</h4>
+                        <p class="card-text lang-en">Bus stop 300m from hotel (routes to city center, train station). Subway station 1.2km away (Line X).</p>
+                        <p class="card-text lang-zh" style="display: none;">酒店300米处有公交站（可达市中心、火车站），1.2公里处有地铁站（X号线）。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-ticket-alt"></i> Bus ticket: ¥2/person</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-ticket-alt"></i> 公交票价：2元/人</div>
+                            <div class="detail-item lang-en"><i class="fas fa-subway"></i> Subway ticket: ¥3-8</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-subway"></i> 地铁票价：3-8元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Ride Sharing">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-car"></i> Ride & Taxi</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-car"></i> 打车出行</h4>
+                        <p class="card-text lang-en">Didi (Chinese Uber) available via app. Taxi stand at hotel entrance. English-speaking drivers can be arranged.</p>
+                        <p class="card-text lang-zh" style="display: none;">支持滴滴出行（中国版优步），酒店门口有出租车停靠点，可协助安排英文司机。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-mobile-alt"></i> Didi app (English version)</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-mobile-alt"></i> 滴滴出行（英文版本）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-hand-holding-usd"></i> Airport transfer: ¥150-200</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-hand-holding-usd"></i> 机场接送：150-200元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 游玩 -->
+        <section class="section">
+            <h3 class="section-title lang-en">Things to Do</h3>
+            <h3 class="section-title lang-zh" style="display: none;">游玩体验</h3>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cultural Attractions">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-landmark"></i> Cultural Sites</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-landmark"></i> 文化景点</h4>
+                        <p class="card-text lang-en">Historic temple (2km), city museum (3km) and ancient town (5km). English guidebooks available at front desk.</p>
+                        <p class="card-text lang-zh" style="display: none;">历史寺庙（2公里）、城市博物馆（3公里）及古镇（5公里），前台可提供英文导览手册。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-clock"></i> 上午9:00 - 下午5:00</div>
+                            <div class="detail-item lang-en"><i class="fas fa-ticket-alt"></i> Ticket: ¥20-50</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-ticket-alt"></i> 门票：20-50元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1534239143101-1b1c627395c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Shopping & Leisure">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title lang-en"><i class="fas fa-shopping-bag"></i> Shopping & Leisure</h4>
+                        <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-shopping-bag"></i> 购物休闲</h4>
+                        <p class="card-text lang-en">Shopping mall (800m) with international brands, local markets (1.5km) for souvenirs. Park nearby for relaxing walks.</p>
+                        <p class="card-text lang-zh" style="display: none;">800米处有国际品牌购物中心，1.5公里处有本地特色集市（可购买纪念品），附近有公园可供散步放松。</p>
+                        <div class="card-details">
+                            <div class="detail-item lang-en"><i class="fas fa-shopping-cart"></i> Mall hours: 10:00-22:00</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-shopping-cart"></i> 商场营业时间：10:00-22:00</div>
+                            <div class="detail-item lang-en"><i class="fas fa-leaf"></i> Park: Free entry</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-leaf"></i> 公园：免费进入</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
+                        <h3>Atour Hotel</h3>
+                    </div>
+                    <p class="lang-en">Your home away from home in China. Our partners are dedicated to providing you with a comfortable and memorable stay.</p>
+                    <p class="lang-zh" style="display: none;">您在中国的家外之家，我们的伙伴致力于为您提供舒适难忘的停留体验。</p>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="lang-en">Contact Us</h4>
+                    <h4 class="lang-zh" style="display: none;">联系我们</h4>
+                    <div class="contact-item lang-en"><i class="fas fa-map-marker-alt"></i> [Hotel Address], [City], China</div>
+                    <div class="contact-item lang-zh" style="display: none;"><i class="fas fa-map-marker-alt"></i> 中国[城市][酒店地址]</div>
+                    <div class="contact-item"><i class="fas fa-phone"></i> +86 [Hotel Phone Number]</div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i> [Hotel Email]</div>
+                </div>
+                <div class="footer-links">
+                    <h4 class="lang-en">Quick Links</h4>
+                    <h4 class="lang-zh" style="display: none;">快速链接</h4>
+                    <a href="#" class="lang-en">Book Now</a>
+                    <a href="#" class="lang-zh" style="display: none;">立即预订</a>
+                    <a href="#" class="lang-en">Hotel Facilities</a>
+                    <a href="#" class="lang-zh" style="display: none;">酒店设施</a>
+                    <a href="#" class="lang-en">Local Guide</a>
+                    <a href="#" class="lang-zh" style="display: none;">本地指南</a>
+                    <a href="#" class="lang-en">FAQs</a>
+                    <a href="#" class="lang-zh" style="display: none;">常见问题</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Atour Hotel. All rights reserved.</p>
             </div>
         </div>
-        
-        <div class="footer">
-            <p>亚朵酒店 • 用心服务每一位客人</p>
-            <p>祝您入住愉快！</p>
-        </div>
-    </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const langElements = document.querySelectorAll('.lang-en, .lang-zh');
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 切换按钮状态
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const lang = btn.getAttribute('data-lang');
+
+                // 切换显示内容
+                langElements.forEach(el => {
+                    if (el.classList.contains(`lang-${lang}`)) {
+                        el.style.display = 'block';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 初始化页面加载完成后的操作
+        window.addEventListener('load', () => {
+            // 确保默认显示英文
+            document.querySelector('.lang-en').style.display = 'block';
+            document.querySelector('.lang-zh').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
