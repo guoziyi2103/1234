@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Guide - Atour Hotel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 额外的本地指南样式 */
+        .guide-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+        
+        .guide-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .guide-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .quick-nav {
+            background: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+        
+        .quick-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .quick-nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quick-nav a:hover {
+            color: #e74c3c;
+        }
+        
+        .guide-section {
+            padding: 60px 0;
+        }
+        
+        .guide-section:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .guide-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .guide-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .guide-card h3 i {
+            color: #e74c3c;
+        }
+        
+        .guide-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .guide-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .guide-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .guide-list li i {
+            color: #3498db;
+            width: 20px;
+        }
+        
+        .emergency-section {
+            background: #e74c3c;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .emergency-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .emergency-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .emergency-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tip-box p {
+            color: #856404;
+            margin: 0;
+        }
+        
+        .back-to-hotel {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-hotel:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .guide-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .quick-nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .emergency-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (复用之前的样式) -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>Atour <span>Hotel</span></h2>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Back to Hotel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#essentials" class="nav-link">Essentials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#food" class="nav-link">Food Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#shopping" class="nav-link">Shopping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#transport" class="nav-link">Transport</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#emergency" class="nav-link">Emergency</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="guide-hero">
+        <div class="container">
+            <h1>Local Living Guide</h1>
+            <p>Everything you need to know about living in China</p>
+        </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#essentials"><i class="fas fa-star"></i> Daily Essentials</a></li>
+                <li><a href="#food"><i class="fas fa-utensils"></i> Food & Dining</a></li>
+                <li><a href="#shopping"><i class="fas fa-shopping-bag"></i> Shopping</a></li>
+                <li><a href="#transport"><i class="fas fa-subway"></i> Transportation</a></li>
+                <li><a href="#culture"><i class="fas fa-landmark"></i> Culture Tips</a></li>
+                <li><a href="#emergency"><i class="fas fa-phone-alt"></i> Emergency</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Daily Essentials Section -->
+    <section id="essentials" class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Daily Essentials <span>生活必需</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fas fa-wifi"></i> Internet & SIM</h3>
+                    <p>Stay connected during your stay</p>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-check"></i> Hotel WiFi: Free high-speed</li>
+                        <li><i class="fas fa-check"></i> Local SIM: China Mobile/Unicom</li>
+                        <li><i class="fas fa-check"></i> VPN needed for Google/Facebook</li>
+                        <li><i class="fas fa-check"></i> WeChat for daily communication</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-money-bill"></i> Money & Payment</h3>
+                    <p>Payment methods in China</p>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-check"></i> WeChat Pay & Alipay (most common)</li>
+                        <li><i class="fas fa-check"></i> Cash: RMB (Yuan)</li>
+                        <li><i class="fas fa-check"></i> Credit cards (limited acceptance)</li>
+                        <li><i class="fas fa-check"></i> Hotel accepts international cards</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-language"></i> Language</h3>
+                    <p>Communication tips</p>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-check"></i> Download translation apps</li>
+                        <li><i class="fas fa-check"></i> Learn basic phrases</li>
+                        <li><i class="fas fa-check"></i> Hotel staff speaks English</li>
+                        <li><i class="fas fa-check"></i> Use translation devices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                <p>Download WeChat and Alipay before arriving. Set up your payment methods to make daily transactions easier.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Guide Section -->
+    <section id="food" class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Food & Dining Guide <span>美食指南</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fas fa-utensils"></i> Must-Try Local Dishes</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-drumstick-bite"></i> Peking Duck - 北京烤鸭</li>
+                        <li><i class="fas fa-fish"></i> Hot Pot - 火锅</li>
+                        <li><i class="fas fa-bowl-rice"></i> Dim Sum - 点心</li>
+                        <li><i class="fas fa-bread-slice"></i> Soup Dumplings - 小笼包</li>
+                        <li><i class="fas fa-pepper-hot"></i> Kung Pao Chicken - 宫保鸡丁</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-coffee"></i> Cafes & Restaurants</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-star"></i> Starbucks (major cities)</li>
+                        <li><i class="fas fa-leaf"></i> Local tea houses</li>
+                        <li><i class="fas fa-hamburger"></i> McDonald's/KFC (widely available)</li>
+                        <li><i class="fas fa-pizza-slice"></i> Pizza Hut, Domino's</li>
+                        <li><i class="fas fa-utensils"></i> Hotel restaurant (international menu)</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-shopping-basket"></i> Grocery Shopping</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-store"></i> Walmart, Carrefour</li>
+                        <li><i class="fas fa-shopping-cart"></i> Local supermarkets</li>
+                        <li><i class="fas fa-apple-alt"></i> Fresh markets for produce</li>
+                        <li><i class="fas fa-wine-bottle"></i> Import stores for western products</li>
+                        <li><i class="fas fa-tint"></i> Bottled water recommended</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Food Safety</h4>
+                <p>Drink bottled water, avoid street food initially, and choose busy restaurants for better food safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Section -->
+    <section id="shopping" class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Shopping Guide <span>购物指南</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fas fa-shopping-mall"></i> Shopping Malls</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-building"></i> International brands available</li>
+                        <li><i class="fas fa-tag"></i> Price comparison recommended</li>
+                        <li><i class="fas fa-percentage"></i> Sales seasons: Jan/Feb, Jul/Aug</li>
+                        <li><i class="fas fa-credit-card"></i> Tax refund for tourists</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-store-alt"></i> Local Markets</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-gem"></i> Pearl markets - 珍珠市场</li>
+                        <li><i class="fas fa-tshirt"></i> Silk markets - 丝绸市场</li>
+                        <li><i class="fas fa-palette"></i> Antique markets - 古董市场</li>
+                        <li><i class="fas fa-hand-holding-usd"></i> Bargaining expected</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-gift"></i> Souvenirs</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-mug-hot"></i> Tea sets</li>
+                        <li><i class="fas fa-scroll"></i> Calligraphy</li>
+                        <li><i class="fas fa-fan"></i> Silk fans</li>
+                        <li><i class="fas fa-torii-gate"></i> Panda products</li>
+                        <li><i class="fas fa-vial"></i> Traditional medicine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transportation Section -->
+    <section id="transport" class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Transportation <span>交通出行</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fas fa-subway"></i> Public Transport</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-train"></i> Metro: Fast, efficient, cheap</li>
+                        <li><i class="fas fa-bus"></i> Bus: Extensive network</li>
+                        <li><i class="fas fa-ticket-alt"></i> Transportation cards available</li>
+                        <li><i class="fas fa-mobile-alt"></i> Apps: Didi (Uber equivalent)</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-taxi"></i> Taxis & Ride-sharing</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-car"></i> Official taxis (metered)</li>
+                        <li><i class="fas fa-mobile"></i> Didi Chuxing app</li>
+                        <li><i class="fas fa-file-invoice"></i> Keep receipts</li>
+                        <li><i class="fas fa-map-marked-alt"></i> Show destination in Chinese</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-bicycle"></i> Bike Sharing</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-bicycle"></i> Mobike, Ofo, Hello Bike</li>
+                        <li><i class="fas fa-qrcode"></i> QR code activation</li>
+                        <li><i class="fas fa-yen-sign"></i> Very cheap (1-2 RMB/hour)</li>
+                        <li><i class="fas fa-map"></i> Bike lanes in major cities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Tips Section -->
+    <section id="culture" class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Culture & Etiquette <span>文化礼仪</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fas fa-handshake"></i> Social Etiquette</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-hands"></i> Two-handed business card exchange</li>
+                        <li><i class="fas fa-users"></i> Respect for elders</li>
+                        <li><i class="fas fa-volume-down"></i> Moderate speaking volume</li>
+                        <li><i class="fas fa-camera"></i> Ask permission before photos</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-utensils"></i> Dining Etiquette</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-bowl-food"></i> Wait for host to start eating</li>
+                        <li><i class="fas fa-wine-glass"></i> Toast before drinking</li>
+                        <li><i class="fas fa-bone"></i> Don't tap bowl with chopsticks</li>
+                        <li><i class="fas fa-gift"></i> Tipping not customary</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Important Dates</h3>
+                    <ul class="guide-list">
+                        <li><i class="fas fa-dragon"></i> Chinese New Year (Jan/Feb)</li>
+                        <li><i class="fas fa-moon"></i> Mid-Autumn Festival</li>
+                        <li><i class="fas fa-ship"></i> Dragon Boat Festival</li>
+                        <li><i class="fas fa-flag"></i> National Day (Oct 1-7)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4><i class="fas fa-info-circle"></i> Cultural Note</h4>
+                <p>Face (面子) is important in Chinese culture. Avoid causing others to lose face in public situations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergency" class="emergency-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Emergency Contacts <span>紧急联系</span></h2>
+            
+            <div class="emergency-grid">
+                <div class="emergency-card">
+                    <h3><i class="fas fa-phone-alt"></i> General Emergency</h3>
+                    <div class="number">110</div>
+                    <p>Police - 警察</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-ambulance"></i> Medical Emergency</h3>
+                    <div class="number">120</div>
+                    <p>Ambulance - 救护车</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-fire"></i> Fire Emergency</h3>
+                    <div class="number">119</div>
+                    <p>Fire Department - 消防</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-hotel"></i> Hotel Front Desk</h3>
+                    <div class="number">0</div>
+                    <p>From your room phone</p>
+                </div>
+            </div>
+
+            <div class="emergency-grid" style="margin-top: 2rem;">
+                <div class="emergency-card">
+                    <h3><i class="fas fa-globe"></i> Your Embassy</h3>
+                    <p>Keep embassy contact info handy</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-hospital"></i> Nearest Hospital</h3>
+                    <p>Ask front desk for directions</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-language"></i> Translation Service</h3>
+                    <p>Available through hotel</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3><i class="fas fa-shield-alt"></i> Travel Insurance</h3>
+                    <p>Keep policy number accessible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Useful Apps Section -->
+    <section class="guide-section">
+        <div class="container">
+            <h2 class="section-title">Useful Apps <span>实用应用</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i class="fab fa-weixin"></i> WeChat (微信)</h3>
+                    <p>Essential for daily life in China</p>
+                    <ul class="guide-list">
+                        <li>Messaging & calls</li>
+                        <li>Mobile payments</li>
+                        <li>Social media</li>
+                        <li>Mini programs</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-map"></i> Baidu Maps</h3>
+                    <p>Navigation and local search</p>
+                    <ul class="guide-list">
+                        <li>Turn-by-turn navigation</li>
+                        <li>Public transport routes</li>
+                        <li>Local business search</li>
+                        <li>English interface available</li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><i class="fas fa-car"></i> Didi Chuxing</h3>
+                    <p>Ride-hailing service</p>
+                    <ul class="guide-list">
+                        <li>Similar to Uber</li>
+                        <li>English version available</li>
+                        <li>Various vehicle types</li>
+                        <li>Cash and card payment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">← Back to Hotel Website</a></li>
+                        <li><a href="#essentials">Daily Essentials</a></li>
+                        <li><a href="#food">Food Guide</a></li>
+                        <li><a href="#emergency">Emergency Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Hotel Services</h3>
+                    <ul>
+                        <li><a href="index.html#contact">24/7 Front Desk</a></li>
+                        <li><a href="index.html#contact">Concierge Service</a></li>
+                        <li><a href="index.html#contact">Tour Arrangements</a></li>
+                        <li><a href="index.html#contact">Translation Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Need Help?</h3>
+                    <p>Our front desk staff is always ready to assist you with any questions about local life.</p>
+                    <p><strong>Hotel Hotline:</strong> +86 123 4567 8900</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Atour Hotel. Your Local Guide to China.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Hotel Button -->
+    <a href="index.html" class="back-to-hotel">
+        <i class="fas fa-hotel"></i>
+        Back to Hotel
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
