@@ -19,6 +19,8 @@
             font-family: 'Poppins', sans-serif;
             color: #333;
             line-height: 1.6;
+            /* 添加语言切换过渡 */
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -282,13 +284,14 @@
             transform: translateY(-2px);
         }
         
-        /* 中英文切换样式 */
+        /* 中英文切换样式 - 优化 */
         .lang-switch {
             position: absolute;
             top: 20px;
             right: 20px;
             display: flex;
             gap: 10px;
+            z-index: 1001; /* 确保在导航之上 */
         }
         
         .lang-btn {
@@ -304,18 +307,28 @@
         
         .lang-btn.active {
             background: #e74c3c;
+            transform: scale(1.05); /* 选中态放大 */
         }
         
+        .lang-btn:hover {
+            background: #34495e;
+        }
+        
+        /* 双语文本切换 - 优化过渡 */
         .cn, .en {
             display: inline;
+            transition: opacity 0.3s ease;
         }
         
+        /* 语言类控制显示隐藏 */
         .lang-en .cn {
             display: none;
+            opacity: 0;
         }
         
         .lang-cn .en {
             display: none;
+            opacity: 0;
         }
         
         /* 页脚样式 */
@@ -1248,7 +1261,9 @@
             <div class="guide-grid">
                 <div class="guide-card">
                     <h3>
-                        <i class="fab fa-weixin"></i> WeChat (微信)
+                        <i class="fab fa-weixin"></i> 
+                        <span class="cn">微信 (WeChat)</span>
+                        <span class="en">WeChat</span>
                     </h3>
                     <p>
                         <span class="cn">中国日常生活必备</span>
@@ -1438,54 +1453,112 @@
         <span class="en">Back to Hotel</span>
     </a>
 
-    <!-- JavaScript for Language Switch -->
+    <!-- JavaScript for Language Switch - 完善版 -->
     <script>
-        // 语言切换功能
-        const langBtns = document.querySelectorAll('.lang-btn');
-        const body = document.body;
-        
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 移除所有active类
-                langBtns.forEach(b => b.classList.remove('active'));
-                // 给当前按钮添加active类
-                btn.classList.add('active');
-                
-                // 切换语言类
-                const lang = btn.getAttribute('data-lang');
-                if (lang === 'cn') {
-                    body.classList.remove('lang-en');
-                    body.classList.add('lang-cn');
+        // 初始化：从本地存储读取语言偏好，无则默认中文
+        const initLanguage = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'cn';
+            const body = document.body;
+            const langBtns = document.querySelectorAll('.lang-btn');
+            
+            // 设置body的语言类
+            body.classList.remove('lang-cn', 'lang-en');
+            body.classList.add(`lang-${savedLang}`);
+            
+            // 更新按钮的active状态
+            langBtns.forEach(btn => {
+                if (btn.getAttribute('data-lang') === savedLang) {
+                    btn.classList.add('active');
                 } else {
-                    body.classList.remove('lang-cn');
-                    body.classList.add('lang-en');
+                    btn.classList.remove('active');
                 }
             });
-        });
+        };
 
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // 语言切换功能
+        const setupLanguageSwitch = () => {
+            const langBtns = document.querySelectorAll('.lang-btn');
+            const body = document.body;
+            
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 移除所有active类
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    // 给当前按钮添加active类
+                    btn.classList.add('active');
+                    
+                    // 切换语言类
+                    const lang = btn.getAttribute('data-lang');
+                    body.classList.remove('lang-cn', 'lang-en');
+                    body.classList.add(`lang-${lang}`);
+                    
+                    // 保存到本地存储
+                    localStorage.setItem('preferredLang', lang);
+                    
+                    // 可选：添加切换提示（增强体验）
+                    const tip = document.createElement('div');
+                    tip.style.position = 'fixed';
+                    tip.style.top = '20px';
+                    tip.style.left = '50%';
+                    tip.style.transform = 'translateX(-50%)';
+                    tip.style.background = '#27ae60';
+                    tip.style.color = 'white';
+                    tip.style.padding = '8px 16px';
+                    tip.style.borderRadius = '4px';
+                    tip.style.zIndex = '9999';
+                    tip.style.opacity = '0';
+                    tip.style.transition = 'opacity 0.3s ease';
+                    tip.innerText = lang === 'cn' ? '已切换为中文' : 'Switched to English';
+                    document.body.appendChild(tip);
+                    
+                    // 显示提示后移除
+                    setTimeout(() => tip.style.opacity = '1', 100);
+                    setTimeout(() => {
+                        tip.style.opacity = '0';
+                        setTimeout(() => document.body.removeChild(tip), 300);
+                    }, 2000);
                 });
             });
-        });
+        };
+
+        // 平滑滚动
+        const setupSmoothScroll = () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
 
         // 移动端菜单
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+        const setupMobileMenu = () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }));
+        };
+
+        // 页面加载完成后初始化所有功能
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguage();          // 初始化语言
+            setupLanguageSwitch();   // 绑定语言切换事件
+            setupSmoothScroll();     // 平滑滚动
+            setupMobileMenu();       // 移动端菜单
         });
-        
-        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }));
     </script>
 </body>
 </html>
