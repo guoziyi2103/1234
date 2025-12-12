@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Guide - Atour Hotel</title>
+    <title>Local Guide - Atour Hotel Tianfu Square</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -105,7 +105,7 @@
             padding: 0.5rem 0;
             border-bottom: 1px solid #ecf0f1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
         }
         
@@ -116,6 +116,7 @@
         .guide-list li i {
             color: #3498db;
             width: 20px;
+            margin-top: 4px;
         }
         
         .emergency-section {
@@ -190,6 +191,42 @@
             transform: translateY(-2px);
         }
         
+        /* 中英文切换样式 */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #2c3e50;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .lang-btn.active {
+            background: #e74c3c;
+        }
+        
+        .cn, .en {
+            display: inline;
+        }
+        
+        .lang-en .cn {
+            display: none;
+        }
+        
+        .lang-cn .en {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .guide-hero h1 {
                 font-size: 2rem;
@@ -203,11 +240,23 @@
             .emergency-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .lang-switch {
+                position: static;
+                justify-content: center;
+                margin: 1rem 0;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Header (复用之前的样式) -->
+<body class="lang-cn">
+    <!-- 语言切换按钮 -->
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="cn">中文</button>
+        <button class="lang-btn" data-lang="en">English</button>
+    </div>
+
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
@@ -216,22 +265,22 @@
                 </div>
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link">Back to Hotel</a>
+                        <a href="index.html" class="nav-link"><span class="cn">返回酒店主页</span><span class="en">Back to Hotel</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#essentials" class="nav-link">Essentials</a>
+                        <a href="#essentials" class="nav-link"><span class="cn">生活必需</span><span class="en">Essentials</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#food" class="nav-link">Food Guide</a>
+                        <a href="#food" class="nav-link"><span class="cn">美食指南</span><span class="en">Food Guide</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#shopping" class="nav-link">Shopping</a>
+                        <a href="#attractions" class="nav-link"><span class="cn">景点游玩</span><span class="en">Attractions</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#transport" class="nav-link">Transport</a>
+                        <a href="#transport" class="nav-link"><span class="cn">交通出行</span><span class="en">Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#emergency" class="nav-link">Emergency</a>
+                        <a href="#emergency" class="nav-link"><span class="cn">紧急联系</span><span class="en">Emergency</span></a>
                     </li>
                 </ul>
                 <div class="hamburger">
@@ -246,8 +295,8 @@
     <!-- Hero Section -->
     <section class="guide-hero">
         <div class="container">
-            <h1>Local Living Guide</h1>
-            <p>Everything you need to know about living in China</p>
+            <h1><span class="cn">天府广场亚朵酒店本地指南</span><span class="en">Atour Hotel Tianfu Square Local Guide</span></h1>
+            <p><span class="cn">探索成都的美食、景点与文化</span><span class="en">Explore Chengdu's Food, Attractions & Culture</span></p>
         </div>
     </section>
 
@@ -255,12 +304,12 @@
     <div class="quick-nav">
         <div class="container">
             <ul>
-                <li><a href="#essentials"><i class="fas fa-star"></i> Daily Essentials</a></li>
-                <li><a href="#food"><i class="fas fa-utensils"></i> Food & Dining</a></li>
-                <li><a href="#shopping"><i class="fas fa-shopping-bag"></i> Shopping</a></li>
-                <li><a href="#transport"><i class="fas fa-subway"></i> Transportation</a></li>
-                <li><a href="#culture"><i class="fas fa-landmark"></i> Culture Tips</a></li>
-                <li><a href="#emergency"><i class="fas fa-phone-alt"></i> Emergency</a></li>
+                <li><a href="#essentials"><<i class="fas fa-star"></</i> <span class="cn">生活必需</span><span class="en">Daily Essentials</span></a></li>
+                <li><a href="#food"><<i class="fas fa-utensils"></</i> <span class="cn">美食餐饮</span><span class="en">Food & Dining</span></a></li>
+                <li><a href="#attractions"><<i class="fas fa-camera"></</i> <span class="cn">景点游玩</span><span class="en">Attractions</span></a></li>
+                <li><a href="#shopping"><<i class="fas fa-shopping-bag"></</i> <span class="cn">购物推荐</span><span class="en">Shopping</span></a></li>
+                <li><a href="#transport"><<i class="fas fa-subway"></</i> <span class="cn">交通出行</span><span class="en">Transportation</span></a></li>
+                <li><a href="#emergency"><<i class="fas fa-phone-alt"></</i> <span class="cn">紧急联系</span><span class="en">Emergency</span></a></li>
             </ul>
         </div>
     </div>
@@ -268,46 +317,46 @@
     <!-- Daily Essentials Section -->
     <section id="essentials" class="guide-section">
         <div class="container">
-            <h2 class="section-title">Daily Essentials <span>生活必需</span></h2>
+            <h2 class="section-title"><span class="cn">生活必需</span><span class="en">Daily Essentials</span></h2>
             
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3><i class="fas fa-wifi"></i> Internet & SIM</h3>
-                    <p>Stay connected during your stay</p>
+                    <h3><<i class="fas fa-wifi"></</i> <span class="cn">网络与电话卡</span><span class="en">Internet & SIM</span></h3>
+                    <p><span class="cn">旅行期间保持通讯畅通</span><span class="en">Stay connected during your stay</span></p>
                     <ul class="guide-list">
-                        <li><i class="fas fa-check"></i> Hotel WiFi: Free high-speed</li>
-                        <li><i class="fas fa-check"></i> Local SIM: China Mobile/Unicom</li>
-                        <li><i class="fas fa-check"></i> VPN needed for Google/Facebook</li>
-                        <li><i class="fas fa-check"></i> WeChat for daily communication</li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">酒店WiFi：免费高速网络</span><span class="en">Hotel WiFi: Free high-speed</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">本地电话卡：中国移动/联通</span><span class="en">Local SIM: China Mobile/Unicom</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">微信：日常通讯必备</span><span class="en">WeChat for daily communication</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">部分国外软件需VPN</span><span class="en">VPN needed for some foreign apps</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-money-bill"></i> Money & Payment</h3>
-                    <p>Payment methods in China</p>
+                    <h3><<i class="fas fa-money-bill"></</i> <span class="cn">支付方式</span><span class="en">Money & Payment</span></h3>
+                    <p><span class="cn">在中国的支付方式</span><span class="en">Payment methods in China</span></p>
                     <ul class="guide-list">
-                        <li><i class="fas fa-check"></i> WeChat Pay & Alipay (most common)</li>
-                        <li><i class="fas fa-check"></i> Cash: RMB (Yuan)</li>
-                        <li><i class="fas fa-check"></i> Credit cards (limited acceptance)</li>
-                        <li><i class="fas fa-check"></i> Hotel accepts international cards</li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">微信支付 & 支付宝（最常用）</span><span class="en">WeChat Pay & Alipay (most common)</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">现金：人民币（元）</span><span class="en">Cash: RMB (Yuan)</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">信用卡：部分场所接受</span><span class="en">Credit cards (limited acceptance)</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">酒店接受国际信用卡</span><span class="en">Hotel accepts international cards</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-language"></i> Language</h3>
-                    <p>Communication tips</p>
+                    <h3><<i class="fas fa-language"></</i> <span class="cn">语言沟通</span><span class="en">Language</span></h3>
+                    <p><span class="cn">沟通小贴士</span><span class="en">Communication tips</span></p>
                     <ul class="guide-list">
-                        <li><i class="fas fa-check"></i> Download translation apps</li>
-                        <li><i class="fas fa-check"></i> Learn basic phrases</li>
-                        <li><i class="fas fa-check"></i> Hotel staff speaks English</li>
-                        <li><i class="fas fa-check"></i> Use translation devices</li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">下载翻译软件（如百度翻译）</span><span class="en">Download translation apps (Baidu Translate)</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">学习基础中文短语</span><span class="en">Learn basic Chinese phrases</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">酒店员工可提供英文服务</span><span class="en">Hotel staff speaks English</span></li>
+                        <li><<i class="fas fa-check"></</i> <span class="cn">出示中文地址给出租车司机</span><span class="en">Show destination in Chinese to taxi drivers</span></li>
                     </ul>
                 </div>
             </div>
-
+            
             <div class="tip-box">
-                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
-                <p>Download WeChat and Alipay before arriving. Set up your payment methods to make daily transactions easier.</p>
+                <h4><<i class="fas fa-lightbulb"></</i> <span class="cn">实用提示</span><span class="en">Pro Tip</span></h4>
+                <p><span class="cn">提前下载微信和支付宝，绑定支付方式，方便日常消费。</span><span class="en">Download WeChat and Alipay before arriving. Set up payment methods for easy daily transactions.</span></p>
             </div>
         </div>
     </section>
@@ -315,46 +364,92 @@
     <!-- Food Guide Section -->
     <section id="food" class="guide-section">
         <div class="container">
-            <h2 class="section-title">Food & Dining Guide <span>美食指南</span></h2>
+            <h2 class="section-title"><span class="cn">美食餐饮指南</span><span class="en">Food & Dining Guide</span></h2>
             
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3><i class="fas fa-utensils"></i> Must-Try Local Dishes</h3>
+                    <h3><<i class="fas fa-fire"></</i> <span class="cn">火锅推荐</span><span class="en">Hot Pot Recommendations</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-drumstick-bite"></i> Peking Duck - 北京烤鸭</li>
-                        <li><i class="fas fa-fish"></i> Hot Pot - 火锅</li>
-                        <li><i class="fas fa-bowl-rice"></i> Dim Sum - 点心</li>
-                        <li><i class="fas fa-bread-slice"></i> Soup Dumplings - 小笼包</li>
-                        <li><i class="fas fa-pepper-hot"></i> Kung Pao Chicken - 宫保鸡丁</li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">街檐口火锅 - 700米</span><span class="en">Jieyankou Hot Pot - 700m</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">罗二火锅（小关庙店）- 3.9公里</span><span class="en">Luo'er Hot Pot (Xiaoguanmiao) - 3.9km</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">川西坝子 - 1.9公里</span><span class="en">Chuanxi Bazai Hot Pot - 1.9km</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">撑头火锅（科华店）- 3.4公里</span><span class="en">Chengtou Hot Pot (Kehua) - 3.4km</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">清江东路3.0直营店 - 3.0公里</span><span class="en">Qingjiang East Road 3.0 Direct Store - 3.0km</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-coffee"></i> Cafes & Restaurants</h3>
+                    <h3><<i class="fas fa-pepper-hot"></</i> <span class="cn">川菜&特色小吃</span><span class="en">Sichuan Cuisine & Snacks</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-star"></i> Starbucks (major cities)</li>
-                        <li><i class="fas fa-leaf"></i> Local tea houses</li>
-                        <li><i class="fas fa-hamburger"></i> McDonald's/KFC (widely available)</li>
-                        <li><i class="fas fa-pizza-slice"></i> Pizza Hut, Domino's</li>
-                        <li><i class="fas fa-utensils"></i> Hotel restaurant (international menu)</li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">陶德砂锅 / 饕林 / 张鸡毛店</span><span class="en">Taode Casserole / Taolin / Zhang Jimao</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">百年神厨 - 经典川菜</span><span class="en">Century God Chef - Classic Sichuan</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">张太婆老妈蹄花（太升南路）- 800米</span><span class="en">Aunt Zhang's Trotter Soup - 800m</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">徐记手撕烤兔（太古里店）</span><span class="en">Xu's Hand-Torn Roast Rabbit (Taikooli)</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">骨味鲜云南砂锅米线 - 1.2公里</span><span class="en">Guwei Xian Yunnan Rice Noodle - 1.2km</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-shopping-basket"></i> Grocery Shopping</h3>
+                    <h3><<i class="fas fa-bowl-rice"></</i> <span class="cn">串串&清真美食</span><span class="en">Skewers & Halal Food</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-store"></i> Walmart, Carrefour</li>
-                        <li><i class="fas fa-shopping-cart"></i> Local supermarkets</li>
-                        <li><i class="fas fa-apple-alt"></i> Fresh markets for produce</li>
-                        <li><i class="fas fa-wine-bottle"></i> Import stores for western products</li>
-                        <li><i class="fas fa-tint"></i> Bottled water recommended</li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">马路边边串串香（盐市口店）- 500米</span><span class="en">Malu Bianbian Skewers (Yanshikou) - 500m</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">乐山钵钵鸡 - 特色冷串</span><span class="en">Leshan Boboji - Cold Skewers</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">马小英鲜牛肉砂锅面 - 750米</span><span class="en">Ma Xiaoying Fresh Beef Casserole Noodle - 750m</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">福字面（福字街）- 周内14:30-16:30休息</span><span class="en">Fuzi Noodle - Closed 14:30-16:30 on weekdays</span></li>
+                        <li><<i class="fas fa-utensils"></</i> <span class="cn">兰州牛肉面 - 天府公寓店附近</span><span class="en">Lanzhou Beef Noodle - Near Tianfu Apartment</span></li>
                     </ul>
                 </div>
             </div>
-
+            
             <div class="tip-box">
-                <h4><i class="fas fa-exclamation-triangle"></i> Food Safety</h4>
-                <p>Drink bottled water, avoid street food initially, and choose busy restaurants for better food safety.</p>
+                <h4><<i class="fas fa-exclamation-triangle"></</i> <span class="cn">美食提示</span><span class="en">Food Safety</span></h4>
+                <p><span class="cn">成都美食偏辣，不能吃辣可提前告知店家"微辣"或"不辣"；推荐尝试本地特色火锅和蹄花，味道正宗。</span><span class="en">Chengdu food is usually spicy. Ask for "mild spicy" or "no spicy" if you can't handle spice. Recommended to try local hot pot and trotter soup.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attractions Section -->
+    <section id="attractions" class="guide-section">
+        <div class="container">
+            <h2 class="section-title"><span class="cn">景点游玩指南</span><span class="en">Attractions Guide</span></h2>
+            
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><<i class="fas fa-paw"></</i> <span class="cn">熊猫相关景点</span><span class="en">Panda-related Attractions</span></h3>
+                    <ul class="guide-list">
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">成都大熊猫繁育研究基地 - 门票55元</span><span class="en">Chengdu Panda Base - Ticket ¥55</span>
+                            <br><span class="cn">西门（花花打卡点）/南门均可进入</span><span class="en">West Gate (Huahua's spot) & South Gate available</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">熊猫谷 - 门票55元</span><span class="en">Panda Valley - Ticket ¥55</span>
+                            <br><span class="cn">动物更亲近，互动性强</span><span class="en">Closer to pandas, better interaction</span></li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><<i class="fas fa-mountain"></</i> <span class="cn">自然&历史景点</span><span class="en">Nature & Historical Sites</span></h3>
+                    <ul class="guide-list">
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">青城山 - 前山门票80元/后山20元</span><span class="en">Qingcheng Mountain - ¥80 (Front)/¥20 (Back)</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">都江堰 - 门票80元</span><span class="en">Dujiangyan Irrigation - Ticket ¥80</span>
+                            <br><span class="cn">可乘大巴或高铁前往</span><span class="en">Accessible by bus or high-speed rail</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">三星堆博物馆 - 门票72元（德阳市）</span><span class="en">Sanxingdui Museum - Ticket ¥72 (Deyang)</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">四川科技馆/博物馆 - 天府广场附近</span><span class="en">Sichuan Science & Technology Museum - Near Tianfu Square</span></li>
+                    </ul>
+                </div>
+                
+                <div class="guide-card">
+                    <h3><<i class="fas fa-landmark"></</i> <span class="cn">市区&文化景点</span><span class="en">Urban & Cultural Attractions</span></h3>
+                    <ul class="guide-list">
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">春熙路/太古里 - 购物逛街</span><span class="en">Chunxi Road/Taikooli - Shopping & Dining</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">锦里古街 - 建议晚上游览</span><span class="en">Jinli Ancient Street - Recommended at night</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">九眼桥 - 酒吧街，夜生活</span><span class="en">Jiuyanqiao - Bar street, nightlife</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">东郊记忆 - 文创园区</span><span class="en">East Suburb Memory - Cultural & Creative Park</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">川剧（川人川戏）- 体验本地文化</span><span class="en">Sichuan Opera - Experience local culture</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><<i class="fas fa-lightbulb"></</i> <span class="cn">游玩提示</span><span class="en">Travel Tip</span></h4>
+                <p><span class="cn">熊猫基地建议早上去（8-9点），避开人流高峰；青城山和都江堰可安排一日游；锦里晚上灯光更美，适合拍照。</span><span class="en">Visit Panda Base early (8-9 AM) to avoid crowds; Qingcheng Mountain and Dujiangyan can be a day trip; Jinli looks better at night with lights, perfect for photos.</span></p>
             </div>
         </div>
     </section>
@@ -362,37 +457,36 @@
     <!-- Shopping Section -->
     <section id="shopping" class="guide-section">
         <div class="container">
-            <h2 class="section-title">Shopping Guide <span>购物指南</span></h2>
+            <h2 class="section-title"><span class="cn">购物指南</span><span class="en">Shopping Guide</span></h2>
             
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3><i class="fas fa-shopping-mall"></i> Shopping Malls</h3>
+                    <h3><<i class="fas fa-shopping-mall"></</i> <span class="cn">购物中心</span><span class="en">Shopping Malls</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-building"></i> International brands available</li>
-                        <li><i class="fas fa-tag"></i> Price comparison recommended</li>
-                        <li><i class="fas fa-percentage"></i> Sales seasons: Jan/Feb, Jul/Aug</li>
-                        <li><i class="fas fa-credit-card"></i> Tax refund for tourists</li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">IFS国际金融中心 - 高端品牌</span><span class="en">IFS International Finance Center - Luxury Brands</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">天府红购物中心 - 二次元主题</span><span class="en">Tianfu Red Mall - ACG Theme</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">茂业百货美食城 - 购物+美食</span><span class="en">Maoye Department Store Food Court - Shopping + Dining</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">恒大广场 - 综合购物体验</span><span class="en">Evergrande Plaza - Comprehensive Shopping</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-store-alt"></i> Local Markets</h3>
+                    <h3><<i class="fas fa-store-alt"></</i> <span class="cn">特色街区</span><span class="en">Characteristic Streets</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-gem"></i> Pearl markets - 珍珠市场</li>
-                        <li><i class="fas fa-tshirt"></i> Silk markets - 丝绸市场</li>
-                        <li><i class="fas fa-palette"></i> Antique markets - 古董市场</li>
-                        <li><i class="fas fa-hand-holding-usd"></i> Bargaining expected</li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">春熙路 - 成都核心商圈</span><span class="en">Chunxi Road - Chengdu's Core Business District</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">太古里 - 奢侈品+文创店铺</span><span class="en">Taikooli - Luxury + Cultural Shops</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">奎星楼街 - 美食+文创（1.9公里）</span><span class="en">Kuixinglou Street - Food + Cultural (1.9km)</span></li>
+                        <li><<i class="fas fa-map-marker-alt"></</i> <span class="cn">玉林街 - 老成都风情（3.6公里）</span><span class="en">Yulin Street - Old Chengdu Style (3.6km)</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-gift"></i> Souvenirs</h3>
+                    <h3><<i class="fas fa-gift"></</i> <span class="cn">伴手礼推荐</span><span class="en">Souvenirs</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-mug-hot"></i> Tea sets</li>
-                        <li><i class="fas fa-scroll"></i> Calligraphy</li>
-                        <li><i class="fas fa-fan"></i> Silk fans</li>
-                        <li><i class="fas fa-torii-gate"></i> Panda products</li>
-                        <li><i class="fas fa-vial"></i> Traditional medicine</li>
+                        <li><<i class="fas fa-box"></</i> <span class="cn">蜀绣 - 四川传统手工艺品</span><span class="en">Shu Embroidery - Traditional Sichuan Craft</span></li>
+                        <li><<i class="fas fa-box"></</i> <span class="cn">火锅底料 - 蜀大侠/小龙坎品牌</span><span class="en">Hot Pot Base - Shudaxia/Xiaolongkan Brand</span></li>
+                        <li><<i class="fas fa-box"></</i> <span class="cn">熊猫周边 - 可爱纪念品</span><span class="en">Panda Merchandise - Cute Souvenirs</span></li>
+                        <li><<i class="fas fa-box"></</i> <span class="cn">四川茶叶 - 蒙顶山茶/碧潭飘雪</span><span class="en">Sichuan Tea - Mengding Mountain/Bitan Piaoxue</span></li>
                     </ul>
                 </div>
             </div>
@@ -402,82 +496,38 @@
     <!-- Transportation Section -->
     <section id="transport" class="guide-section">
         <div class="container">
-            <h2 class="section-title">Transportation <span>交通出行</span></h2>
+            <h2 class="section-title"><span class="cn">交通出行指南</span><span class="en">Transportation Guide</span></h2>
             
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3><i class="fas fa-subway"></i> Public Transport</h3>
+                    <h3><<i class="fas fa-subway"></</i> <span class="cn">地铁出行</span><span class="en">Metro</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-train"></i> Metro: Fast, efficient, cheap</li>
-                        <li><i class="fas fa-bus"></i> Bus: Extensive network</li>
-                        <li><i class="fas fa-ticket-alt"></i> Transportation cards available</li>
-                        <li><i class="fas fa-mobile-alt"></i> Apps: Didi (Uber equivalent)</li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">地铁2号线 - 直达火车东站（约30分钟）</span><span class="en">Line 2 - Direct to East Railway Station (30 mins)</span></li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">地铁12号线 - 便捷换乘</span><span class="en">Line 12 - Convenient transfer</span></li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">地铁卡/天府通 - 可在地铁站购买</span><span class="en">Metro Card/Tianfu Tong - Available at stations</span></li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">微信/支付宝乘车码 - 扫码进站</span><span class="en">WeChat/Alipay Metro QR Code - Scan to enter</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-taxi"></i> Taxis & Ride-sharing</h3>
+                    <h3><<i class="fas fa-bus"></</i> <span class="cn">大巴&火车</span><span class="en">Bus & Train</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-car"></i> Official taxis (metered)</li>
-                        <li><i class="fas fa-mobile"></i> Didi Chuxing app</li>
-                        <li><i class="fas fa-file-invoice"></i> Keep receipts</li>
-                        <li><i class="fas fa-map-marked-alt"></i> Show destination in Chinese</li>
+                        <li><<i class="fas fa-bus"></</i> <span class="cn">旅游大巴 - 熊猫基地/IFS专线</span><span class="en">Tourist Bus - Panda Base/IFS Special Line</span></li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">高铁 - 前往都江堰/青城山/三星堆</span><span class="en">High-speed Rail - To Dujiangyan/Qingcheng/Sanxingdui</span></li>
+                        <li><<i class="fas fa-train"></</i> <span class="cn">火车东站 - 最近的高铁站</span><span class="en">East Railway Station - Nearest high-speed rail station</span></li>
+                        <li><<i class="fas fa-bus"></</i> <span class="cn">市区公交 - 覆盖主要景点</span><span class="en">City Bus - Covers major attractions</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-bicycle"></i> Bike Sharing</h3>
+                    <h3><<i class="fas fa-car"></</i> <span class="cn">打车&骑行</span><span class="en">Taxis & Cycling</span></h3>
                     <ul class="guide-list">
-                        <li><i class="fas fa-bicycle"></i> Mobike, Ofo, Hello Bike</li>
-                        <li><i class="fas fa-qrcode"></i> QR code activation</li>
-                        <li><i class="fas fa-yen-sign"></i> Very cheap (1-2 RMB/hour)</li>
-                        <li><i class="fas fa-map"></i> Bike lanes in major cities</li>
+                        <li><<i class="fas fa-taxi"></</i> <span class="cn">滴滴出行 - 类似Uber，支持英文</span><span class="en">Didi Chuxing - Uber equivalent, English available</span></li>
+                        <li><<i class="fas fa-taxi"></</i> <span class="cn">出租车 - 打表计费，支持微信支付</span><span class="en">Taxis - Metered, WeChat Pay accepted</span></li>
+                        <li><<i class="fas fa-bicycle"></</i> <span class="cn">共享单车 - 摩拜/哈啰，1-2元/小时</span><span class="en">Bike Sharing - Mobike/Hello Bike, ¥1-2/hour</span></li>
+                        <li><<i class="fas fa-map"></</i> <span class="cn">百度地图/高德地图 - 导航必备</span><span class="en">Baidu Maps/Amap - Essential for navigation</span></li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Culture Tips Section -->
-    <section id="culture" class="guide-section">
-        <div class="container">
-            <h2 class="section-title">Culture & Etiquette <span>文化礼仪</span></h2>
-            
-            <div class="guide-grid">
-                <div class="guide-card">
-                    <h3><i class="fas fa-handshake"></i> Social Etiquette</h3>
-                    <ul class="guide-list">
-                        <li><i class="fas fa-hands"></i> Two-handed business card exchange</li>
-                        <li><i class="fas fa-users"></i> Respect for elders</li>
-                        <li><i class="fas fa-volume-down"></i> Moderate speaking volume</li>
-                        <li><i class="fas fa-camera"></i> Ask permission before photos</li>
-                    </ul>
-                </div>
-                
-                <div class="guide-card">
-                    <h3><i class="fas fa-utensils"></i> Dining Etiquette</h3>
-                    <ul class="guide-list">
-                        <li><i class="fas fa-bowl-food"></i> Wait for host to start eating</li>
-                        <li><i class="fas fa-wine-glass"></i> Toast before drinking</li>
-                        <li><i class="fas fa-bone"></i> Don't tap bowl with chopsticks</li>
-                        <li><i class="fas fa-gift"></i> Tipping not customary</li>
-                    </ul>
-                </div>
-                
-                <div class="guide-card">
-                    <h3><i class="fas fa-calendar-alt"></i> Important Dates</h3>
-                    <ul class="guide-list">
-                        <li><i class="fas fa-dragon"></i> Chinese New Year (Jan/Feb)</li>
-                        <li><i class="fas fa-moon"></i> Mid-Autumn Festival</li>
-                        <li><i class="fas fa-ship"></i> Dragon Boat Festival</li>
-                        <li><i class="fas fa-flag"></i> National Day (Oct 1-7)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h4><i class="fas fa-info-circle"></i> Cultural Note</h4>
-                <p>Face (面子) is important in Chinese culture. Avoid causing others to lose face in public situations.</p>
             </div>
         </div>
     </section>
@@ -485,53 +535,53 @@
     <!-- Emergency Section -->
     <section id="emergency" class="emergency-section">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Emergency Contacts <span>紧急联系</span></h2>
+            <h2 class="section-title" style="color: white;"><span class="cn">紧急联系</span><span class="en">Emergency Contacts</span></h2>
             
             <div class="emergency-grid">
                 <div class="emergency-card">
-                    <h3><i class="fas fa-phone-alt"></i> General Emergency</h3>
+                    <h3><<i class="fas fa-phone-alt"></</i> <span class="cn">报警求助</span><span class="en">General Emergency</span></h3>
                     <div class="number">110</div>
-                    <p>Police - 警察</p>
+                    <p><span class="cn">警察</span><span class="en">Police</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-ambulance"></i> Medical Emergency</h3>
+                    <h3><<i class="fas fa-ambulance"></</i> <span class="cn">医疗急救</span><span class="en">Medical Emergency</span></h3>
                     <div class="number">120</div>
-                    <p>Ambulance - 救护车</p>
+                    <p><span class="cn">救护车</span><span class="en">Ambulance</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-fire"></i> Fire Emergency</h3>
+                    <h3><<i class="fas fa-fire"></</i> <span class="cn">火灾报警</span><span class="en">Fire Emergency</span></h3>
                     <div class="number">119</div>
-                    <p>Fire Department - 消防</p>
+                    <p><span class="cn">消防</span><span class="en">Fire Department</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-hotel"></i> Hotel Front Desk</h3>
+                    <h3><<i class="fas fa-hotel"></</i> <span class="cn">酒店前台</span><span class="en">Hotel Front Desk</span></h3>
                     <div class="number">0</div>
-                    <p>From your room phone</p>
+                    <p><span class="cn">房间内拨打</span><span class="en">From your room phone</span></p>
                 </div>
             </div>
-
+            
             <div class="emergency-grid" style="margin-top: 2rem;">
                 <div class="emergency-card">
-                    <h3><i class="fas fa-globe"></i> Your Embassy</h3>
-                    <p>Keep embassy contact info handy</p>
+                    <h3><<i class="fas fa-globe"></</i> <span class="cn">大使馆</span><span class="en">Your Embassy</span></h3>
+                    <p><span class="cn">随身携带大使馆联系方式</span><span class="en">Keep embassy contact info handy</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-hospital"></i> Nearest Hospital</h3>
-                    <p>Ask front desk for directions</p>
+                    <h3><<i class="fas fa-hospital"></</i> <span class="cn">最近医院</span><span class="en">Nearest Hospital</span></h3>
+                    <p><span class="cn">可向前台咨询路线</span><span class="en">Ask front desk for directions</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-language"></i> Translation Service</h3>
-                    <p>Available through hotel</p>
+                    <h3><<i class="fas fa-language"></</i> <span class="cn">翻译服务</span><span class="en">Translation Service</span></h3>
+                    <p><span class="cn">酒店可提供翻译协助</span><span class="en">Available through hotel</span></p>
                 </div>
                 
                 <div class="emergency-card">
-                    <h3><i class="fas fa-shield-alt"></i> Travel Insurance</h3>
-                    <p>Keep policy number accessible</p>
+                    <h3><<i class="fas fa-shield-alt"></</i> <span class="cn">旅游保险</span><span class="en">Travel Insurance</span></h3>
+                    <p><span class="cn">妥善保管保险单号</span><span class="en">Keep policy number accessible</span></p>
                 </div>
             </div>
         </div>
@@ -540,39 +590,39 @@
     <!-- Useful Apps Section -->
     <section class="guide-section">
         <div class="container">
-            <h2 class="section-title">Useful Apps <span>实用应用</span></h2>
+            <h2 class="section-title"><span class="cn">实用应用</span><span class="en">Useful Apps</span></h2>
             
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3><i class="fab fa-weixin"></i> WeChat (微信)</h3>
-                    <p>Essential for daily life in China</p>
+                    <h3><<i class="fab fa-weixin"></</i> WeChat (微信)</h3>
+                    <p><span class="cn">中国日常生活必备</span><span class="en">Essential for daily life in China</span></p>
                     <ul class="guide-list">
-                        <li>Messaging & calls</li>
-                        <li>Mobile payments</li>
-                        <li>Social media</li>
-                        <li>Mini programs</li>
+                        <li><span class="cn">通讯聊天</span><span class="en">Messaging & calls</span></li>
+                        <li><span class="cn">移动支付</span><span class="en">Mobile payments</span></li>
+                        <li><span class="cn">社交媒体</span><span class="en">Social media</span></li>
+                        <li><span class="cn">小程序（打车/点餐）</span><span class="en">Mini programs (taxi/food order)</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-map"></i> Baidu Maps</h3>
-                    <p>Navigation and local search</p>
+                    <h3><<i class="fas fa-map"></</i> <span class="cn">百度地图/高德地图</span><span class="en">Baidu Maps/Amap</span></h3>
+                    <p><span class="cn">导航与本地搜索</span><span class="en">Navigation and local search</span></p>
                     <ul class="guide-list">
-                        <li>Turn-by-turn navigation</li>
-                        <li>Public transport routes</li>
-                        <li>Local business search</li>
-                        <li>English interface available</li>
+                        <li><span class="cn">步行/驾车/公交导航</span><span class="en">Walking/driving/bus navigation</span></li>
+                        <li><span class="cn">公共交通路线查询</span><span class="en">Public transport routes</span></li>
+                        <li><span class="cn">景点/餐厅搜索</span><span class="en">Attraction/restaurant search</span></li>
+                        <li><span class="cn">支持英文界面</span><span class="en">English interface available</span></li>
                     </ul>
                 </div>
                 
                 <div class="guide-card">
-                    <h3><i class="fas fa-car"></i> Didi Chuxing</h3>
-                    <p>Ride-hailing service</p>
+                    <h3><<i class="fas fa-utensils"></</i> <span class="cn">美团/饿了么</span><span class="en">Meituan/Ele.me</span></h3>
+                    <p><span class="cn">外卖与生活服务</span><span class="en">Food delivery & lifestyle services</span></p>
                     <ul class="guide-list">
-                        <li>Similar to Uber</li>
-                        <li>English version available</li>
-                        <li>Various vehicle types</li>
-                        <li>Cash and card payment</li>
+                        <li><span class="cn">美食外卖</span><span class="en">Food delivery</span></li>
+                        <li><span class="cn">景点门票预订</span><span class="en">Attraction ticket booking</span></li>
+                        <li><span class="cn">酒店预订</span><span class="en">Hotel booking</span></li>
+                        <li><span class="cn">本地生活服务</span><span class="en">Local lifestyle services</span></li>
                     </ul>
                 </div>
             </div>
@@ -584,46 +634,89 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h3><span class="cn">快速链接</span><span class="en">Quick Links</span></h3>
                     <ul>
-                        <li><a href="index.html">← Back to Hotel Website</a></li>
-                        <li><a href="#essentials">Daily Essentials</a></li>
-                        <li><a href="#food">Food Guide</a></li>
-                        <li><a href="#emergency">Emergency Contacts</a></li>
+                        <li><a href="index.html"><span class="cn">返回酒店主页</span><span class="en">← Back to Hotel Website</span></a></li>
+                        <li><a href="#essentials"><span class="cn">生活必需</span><span class="en">Daily Essentials</span></a></li>
+                        <li><a href="#food"><span class="cn">美食指南</span><span class="en">Food Guide</span></a></li>
+                        <li><a href="#emergency"><span class="cn">紧急联系</span><span class="en">Emergency Contacts</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Hotel Services</h3>
+                    <h3><span class="cn">酒店服务</span><span class="en">Hotel Services</span></h3>
                     <ul>
-                        <li><a href="index.html#contact">24/7 Front Desk</a></li>
-                        <li><a href="index.html#contact">Concierge Service</a></li>
-                        <li><a href="index.html#contact">Tour Arrangements</a></li>
-                        <li><a href="index.html#contact">Translation Help</a></li>
+                        <li><a href="#contact"><span class="cn">24小时前台</span><span class="en">24/7 Front Desk</span></a></li>
+                        <li><a href="#contact"><span class="cn">礼宾服务</span><span class="en">Concierge Service</span></a></li>
+                        <li><a href="#contact"><span class="cn">旅游安排</span><span class="en">Tour Arrangements</span></a></li>
+                        <li><a href="#contact"><span class="cn">翻译协助</span><span class="en">Translation Help</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Need Help?</h3>
-                    <p>Our front desk staff is always ready to assist you with any questions about local life.</p>
-                    <p><strong>Hotel Hotline:</strong> +86 123 4567 8900</p>
+                    <h3><span class="cn">需要帮助？</span><span class="en">Need Help?</span></h3>
+                    <p><span class="cn">我们的前台员工随时为您解答关于本地生活的任何问题。</span><span class="en">Our front desk staff is always ready to assist you with any questions about local life.</span></p>
+                    <p><strong><span class="cn">酒店热线：</span><span class="en">Hotel Hotline:</span></strong> +86 123 4567 8900</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Atour Hotel. Your Local Guide to China.</p>
+                <p>&copy; 2024 Atour Hotel. <span class="cn">天府广场亚朵酒店本地指南</span><span class="en">Your Local Guide to Tianfu Square</span>.</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Hotel Button -->
     <a href="index.html" class="back-to-hotel">
-        <i class="fas fa-hotel"></i>
-        Back to Hotel
+        <<i class="fas fa-hotel"></</i>
+        <span class="cn">返回酒店</span><span class="en">Back to Hotel</span>
     </a>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- JavaScript for Language Switch -->
+    <script>
+        // 语言切换功能
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const body = document.body;
+        
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有active类
+                langBtns.forEach(b => b.classList.remove('active'));
+                // 给当前按钮添加active类
+                btn.classList.add('active');
+                
+                // 切换语言类
+                const lang = btn.getAttribute('data-lang');
+                if (lang === 'cn') {
+                    body.classList.remove('lang-en');
+                    body.classList.add('lang-cn');
+                } else {
+                    body.classList.remove('lang-cn');
+                    body.classList.add('lang-en');
+                }
+            });
+        });
 
-    <script src="script.js"></script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 移动端菜单
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
 </body>
 </html>
