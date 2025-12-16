@@ -20,7 +20,6 @@
             color: #333;
             line-height: 1.6;
             transition: all 0.3s ease;
-            /* 侧边导航打开时禁止页面滚动 */
             overflow-x: hidden;
         }
         
@@ -75,7 +74,7 @@
             color: #e74c3c;
         }
         
-        /* PC端导航菜单 - 保持原有样式 */
+        /* PC端导航菜单 - 保持原有样式（移除hover） */
         .nav-menu {
             display: flex;
             list-style: none;
@@ -86,18 +85,20 @@
             color: #2c3e50;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            /* 移除hover过渡 */
+            /* transition: color 0.3s ease; */
         }
         
-        .nav-link:hover {
+        /* 移除导航链接hover效果 */
+        /* .nav-link:hover {
             color: #e74c3c;
-        }
+        } */
         
         /* 汉堡按钮 - 优化样式 */
         .hamburger {
             display: none;
             cursor: pointer;
-            z-index: 1002; /* 确保在侧边导航之上 */
+            z-index: 1002;
             position: relative;
         }
         
@@ -168,15 +169,17 @@
             color: #2c3e50;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            /* 移除hover过渡 */
+            /* transition: color 0.3s ease; */
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .quick-nav a:hover {
+        /* 移除快捷导航hover效果 */
+        /* .quick-nav a:hover {
             color: #e74c3c;
-        }
+        } */
         
         .guide-section {
             padding: 60px 0;
@@ -198,12 +201,14 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            /* 移除卡片hover过渡 */
+            /* transition: transform 0.3s ease; */
         }
         
-        .guide-card:hover {
+        /* 移除卡片hover上移效果 */
+        /* .guide-card:hover {
             transform: translateY(-5px);
-        }
+        } */
         
         .guide-card h3 {
             color: #2c3e50;
@@ -303,10 +308,12 @@
             align-items: center;
             gap: 0.5rem;
             box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            /* 保留返回按钮hover（如需移除可注释） */
             transition: all 0.3s ease;
             z-index: 999;
         }
         
+        /* 如需移除返回按钮hover，注释以下样式 */
         .back-to-hotel:hover {
             background: #229954;
             transform: translateY(-2px);
@@ -319,7 +326,7 @@
             right: 20px;
             display: flex;
             gap: 10px;
-            z-index: 1001; /* 确保在导航之上 */
+            z-index: 1001;
         }
         
         .lang-btn {
@@ -335,9 +342,10 @@
         
         .lang-btn.active {
             background: #e74c3c;
-            transform: scale(1.05); /* 选中态放大 */
+            transform: scale(1.05);
         }
         
+        /* 保留语言按钮hover（如需移除可注释） */
         .lang-btn:hover {
             background: #34495e;
         }
@@ -390,12 +398,14 @@
         .footer-section a {
             color: #ddd;
             text-decoration: none;
-            transition: color 0.3s ease;
+            /* 移除hover过渡 */
+            /* transition: color 0.3s ease; */
         }
         
-        .footer-section a:hover {
+        /* 移除页脚链接hover效果 */
+        /* .footer-section a:hover {
             color: #e74c3c;
-        }
+        } */
         
         .footer-bottom {
             text-align: center;
@@ -427,10 +437,10 @@
             .nav-menu {
                 position: fixed;
                 top: 0;
-                right: -100%; /* 初始隐藏在右侧 */
+                right: -100%;
                 flex-direction: column;
                 background-color: white;
-                width: 80%; /* 侧边栏宽度 */
+                width: 80%;
                 max-width: 300px;
                 height: 100vh;
                 text-align: left;
@@ -438,11 +448,11 @@
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
                 padding: 3rem 2rem;
                 z-index: 1001;
-                overflow-y: auto; /* 内容超出可滚动 */
+                overflow-y: auto;
             }
             
             .nav-menu.active {
-                right: 0; /* 滑入可视区域 */
+                right: 0;
             }
             
             /* 导航项样式优化 */
