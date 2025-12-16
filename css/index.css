@@ -1,1 +1,18 @@
-
+@media (max-width: 768px) {
+  /* 显示汉堡按钮（手机可见，PC隐藏） */
+  .hamburger { display: block; }
+  
+  /* 移动端菜单默认隐藏，点击汉堡按钮后展开 */
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    left: -100%; /* 初始隐藏 */
+    flex-direction: column; /* 垂直排列（PC是水平） */
+    width: 100%; /* 占满屏幕宽度 */
+    background: white;
+    transition: 0.3s;
+  }
+  
+  /* 点击汉堡按钮后，菜单从左侧滑入 */
+  .nav-menu.active { left: 0; }
+}
