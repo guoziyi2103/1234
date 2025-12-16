@@ -19,8 +19,13 @@
             font-family: 'Poppins', sans-serif;
             color: #333;
             line-height: 1.6;
-            /* 添加语言切换过渡 */
             transition: all 0.3s ease;
+            /* 侧边导航打开时禁止页面滚动 */
+            overflow-x: hidden;
+        }
+        
+        body.nav-open {
+            overflow: hidden;
         }
         
         .container {
@@ -36,7 +41,7 @@
             text-align: center;
         }
         
-        /* 头部导航基础样式（补充缺失的基础样式） */
+        /* 头部导航基础样式（核心修改：移动端侧边导航） */
         .header {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -70,6 +75,7 @@
             color: #e74c3c;
         }
         
+        /* PC端导航菜单 - 保持原有样式 */
         .nav-menu {
             display: flex;
             list-style: none;
@@ -87,9 +93,12 @@
             color: #e74c3c;
         }
         
+        /* 汉堡按钮 - 优化样式 */
         .hamburger {
             display: none;
             cursor: pointer;
+            z-index: 1002; /* 确保在侧边导航之上 */
+            position: relative;
         }
         
         .bar {
@@ -99,6 +108,25 @@
             margin: 5px auto;
             background-color: #2c3e50;
             transition: all 0.3s ease;
+        }
+        
+        /* 侧边导航遮罩层 */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* 本地指南核心样式 */
@@ -375,13 +403,14 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* 响应式样式 */
+        /* 响应式样式 - 核心修改：移动端侧边导航 */
         @media (max-width: 768px) {
-            /* 移动端导航 */
+            /* 汉堡按钮显示 */
             .hamburger {
                 display: block;
             }
             
+            /* 汉堡按钮动画 */
             .hamburger.active .bar:nth-child(2) {
                 opacity: 0;
             }
@@ -394,21 +423,43 @@
                 transform: translateY(-8px) rotate(-45deg);
             }
             
+            /* 移动端侧边导航 - 核心样式 */
             .nav-menu {
                 position: fixed;
-                top: 80px;
-                left: -100%;
+                top: 0;
+                right: -100%; /* 初始隐藏在右侧 */
                 flex-direction: column;
                 background-color: white;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                padding: 2rem 0;
+                width: 80%; /* 侧边栏宽度 */
+                max-width: 300px;
+                height: 100vh;
+                text-align: left;
+                transition: 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                padding: 3rem 2rem;
+                z-index: 1001;
+                overflow-y: auto; /* 内容超出可滚动 */
             }
             
             .nav-menu.active {
-                left: 0;
+                right: 0; /* 滑入可视区域 */
+            }
+            
+            /* 导航项样式优化 */
+            .nav-item {
+                margin: 1rem 0;
+                border-bottom: 1px solid #f0f0f0;
+                padding-bottom: 1rem;
+            }
+            
+            .nav-item:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-link {
+                font-size: 1.1rem;
+                display: block;
+                padding: 0.5rem 0;
             }
             
             /* 移动端指南样式 */
@@ -431,6 +482,11 @@
                 justify-content: center;
                 margin: 1rem 0;
             }
+            
+            /* 侧边导航遮罩层适配 */
+            .nav-overlay {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -440,6 +496,9 @@
         <button class="lang-btn active" data-lang="cn">中文</button>
         <button class="lang-btn" data-lang="en">English</button>
     </div>
+
+    <!-- 侧边导航遮罩层 -->
+    <div class="nav-overlay"></div>
 
     <!-- Header -->
     <header class="header">
@@ -1452,6 +1511,98 @@
         <span class="cn">返回酒店</span>
         <span class="en">Back to Hotel</span>
     </a>
-    <script src="main.js"></script>
+
+    <!-- JavaScript 交互逻辑（侧边导航核心） -->
+    <script>
+        // ========== 1. 侧边导航交互 ==========
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // 汉堡按钮切换导航
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            body.classList.toggle('nav-open');
+        });
+
+        // 遮罩层关闭导航
+        navOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.classList.remove('nav-open');
+        });
+
+        // 点击导航链接关闭导航
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.classList.remove('nav-open');
+            });
+        });
+
+        // ========== 2. 语言切换功能 ==========
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const initLanguage = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'cn';
+            body.classList.remove('lang-cn', 'lang-en');
+            body.classList.add(`lang-${savedLang}`);
+            
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === savedLang);
+            });
+        };
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const lang = btn.getAttribute('data-lang');
+                body.classList.remove('lang-cn', 'lang-en');
+                body.classList.add(`lang-${lang}`);
+                
+                localStorage.setItem('preferredLang', lang);
+                
+                // 切换提示
+                const tip = document.createElement('div');
+                tip.style.cssText = `
+                    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background: #27ae60; color: white; padding: 8px 16px; border-radius: 4px;
+                    z-index: 9999; opacity: 0; transition: opacity 0.3s ease;
+                `;
+                tip.innerText = lang === 'cn' ? '已切换为中文' : 'Switched to English';
+                document.body.appendChild(tip);
+                
+                setTimeout(() => tip.style.opacity = '1', 100);
+                setTimeout(() => {
+                    tip.style.opacity = '0';
+                    setTimeout(() => document.body.removeChild(tip), 300);
+                }, 2000);
+            });
+        });
+
+        // ========== 3. 平滑滚动 ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 初始化
+        initLanguage();
+    </script>
 </body>
 </html>
