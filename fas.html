@@ -138,7 +138,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             overflow: hidden;
         }
-        .faq-question {
+        .faq-question-wrapper {
             padding: 20px;
             display: flex;
             justify-content: space-between;
@@ -148,35 +148,43 @@
             color: #2a699d;
             border-bottom: 1px solid #f0f0f0;
         }
-        .faq-question i {
+        .faq-question-text {
+            flex: 1;
+        }
+        .faq-question-icon {
             font-size: 20px;
             transition: transform 0.3s;
+            margin-left: 10px;
         }
-        .faq-answer {
-            padding: 0 20px;
+        .faq-answer-wrapper {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s, padding 0.5s;
+            transition: max-height 0.5s ease;
+        }
+        .faq-answer-content {
+            padding: 0 20px;
             color: #666;
         }
-        .faq-answer.show {
-            padding: 20px;
-            max-height: 500px;
+        .faq-item.expanded .faq-answer-wrapper {
+            max-height: 1000px;
         }
-        .faq-question.active i {
+        .faq-item.expanded .faq-answer-content {
+            padding: 20px;
+        }
+        .faq-item.expanded .faq-question-icon {
             transform: rotate(180deg);
         }
-        .faq-answer ul {
+        .faq-answer-content ul {
             margin: 15px 0 0 20px;
         }
-        .faq-answer li {
+        .faq-answer-content li {
             margin-bottom: 8px;
         }
-        .faq-answer a {
+        .faq-answer-content a {
             color: #2a699d;
             text-decoration: none;
         }
-        .faq-answer a:hover {
+        .faq-answer-content a:hover {
             text-decoration: underline;
         }
         .tip-box {
@@ -312,7 +320,7 @@
             .page-title {
                 font-size: 22px;
             }
-            .faq-question {
+            .faq-question-wrapper {
                 font-size: 14px;
                 padding: 15px;
             }
@@ -354,14 +362,16 @@
 
     <!-- FAQ分类标签 -->
     <div class="container faq-categories">
-        <button class="category-btn active" data-category="all">All Questions</button>
-        <button class="category-btn" data-category="checkin">Check-in & Check-out</button>
-        <button class="category-btn" data-category="payment">Payment</button>
-        <button class="category-btn" data-category="facilities">Hotel Facilities</button>
-        <button class="category-btn" data-category="travel">Travel & Transportation</button>
-        <button class="category-btn" data-category="culture">Cultural Tips</button>
-        <button class="category-btn" data-category="emergency">Emergency</button>
+        <!-- 英文分类按钮 -->
+        <button class="category-btn active lang-en" data-category="all">All Questions</button>
+        <button class="category-btn lang-en" data-category="checkin">Check-in & Check-out</button>
+        <button class="category-btn lang-en" data-category="payment">Payment</button>
+        <button class="category-btn lang-en" data-category="facilities">Hotel Facilities</button>
+        <button class="category-btn lang-en" data-category="travel">Travel & Transportation</button>
+        <button class="category-btn lang-en" data-category="culture">Cultural Tips</button>
+        <button class="category-btn lang-en" data-category="emergency">Emergency</button>
         
+        <!-- 中文分类按钮 -->
         <button class="category-btn lang-zh" style="display: none;" data-category="all">全部问题</button>
         <button class="category-btn lang-zh" style="display: none;" data-category="checkin">入住与退房</button>
         <button class="category-btn lang-zh" style="display: none;" data-category="payment">支付相关</button>
@@ -375,447 +385,435 @@
     <div class="container faq-content">
         <!-- 入住退房相关 -->
         <div class="faq-item" data-category="checkin">
-            <div class="faq-question lang-en">
-                <span>What are the check-in and check-out times?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What are the check-in and check-out times?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">入住和退房时间是多少？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>入住和退房时间是多少？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Standard check-in time is 2:00 PM (14:00) and check-out time is 12:00 PM (noon). </p>
-                <p>If you arrive early (before 2:00 PM), we can store your luggage for free at the front desk until your room is ready. Late check-out can be arranged for an additional fee: ¥100 for up to 2 hours, or half the room rate for a full day extension.</p>
-                <div class="tip-box">
-                    <h4>Pro Tip</h4>
-                    <p>Please inform the front desk in advance if you need late check-out (preferably the day before) to ensure availability.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Standard check-in time is 2:00 PM (14:00) and check-out time is 12:00 PM (noon). </p>
+                    <p>If you arrive early (before 2:00 PM), we can store your luggage for free at the front desk until your room is ready. Late check-out can be arranged for an additional fee: ¥100 for up to 2 hours, or half the room rate for a full day extension.</p>
+                    <div class="tip-box">
+                        <h4>Pro Tip</h4>
+                        <p>Please inform the front desk in advance if you need late check-out (preferably the day before) to ensure availability.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>标准入住时间为下午2:00（14:00），退房时间为中午12:00。</p>
-                <p>如果您提前到达（下午2点前），我们可免费在前台寄存行李，直至房间准备就绪。延迟退房可额外收费安排：2小时内收费100元，全天延住收取半价房费。</p>
-                <div class="tip-box">
-                    <h4>温馨提示</h4>
-                    <p>如需延迟退房，请提前告知前台（最好提前一天），以确保有房可安排。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>标准入住时间为下午2:00（14:00），退房时间为中午12:00。</p>
+                    <p>如果您提前到达（下午2点前），我们可免费在前台寄存行李，直至房间准备就绪。延迟退房可额外收费安排：2小时内收费100元，全天延住收取半价房费。</p>
+                    <div class="tip-box">
+                        <h4>温馨提示</h4>
+                        <p>如需延迟退房，请提前告知前台（最好提前一天），以确保有房可安排。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="checkin">
-            <div class="faq-question lang-en">
-                <span>What documents do I need to check in?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What documents do I need to check in?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">入住需要准备哪些证件？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>入住需要准备哪些证件？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Foreign guests must present a valid passport (with a valid visa or residence permit) for check-in. We are required by Chinese law to scan and register your passport information with the local police station.</p>
-                <p>If you are traveling with a child, please bring the child's passport as well. For group bookings, each guest must provide their own passport.</p>
-                <div class="tip-box">
-                    <h4>Important Note</h4>
-                    <p>Photocopies or digital versions of passports are not accepted - original documents are required.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Foreign guests must present a valid passport (with a valid visa or residence permit) for check-in. We are required by Chinese law to scan and register your passport information with the local police station.</p>
+                    <p>If you are traveling with a child, please bring the child's passport as well. For group bookings, each guest must provide their own passport.</p>
+                    <div class="tip-box">
+                        <h4>Important Note</h4>
+                        <p>Photocopies or digital versions of passports are not accepted - original documents are required.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>外国客人入住需出示有效护照（含有效签证或居留许可）。根据中国法律规定，我们需要扫描并将您的护照信息报备当地派出所。</p>
-                <p>如携带儿童同行，请同时出示儿童护照。团队入住时，每位客人均需提供本人护照。</p>
-                <div class="tip-box">
-                    <h4>重要提示</h4>
-                    <p>不接受护照复印件或电子版本，必须出示原件。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>外国客人入住需出示有效护照（含有效签证或居留许可）。根据中国法律规定，我们需要扫描并将您的护照信息报备当地派出所。</p>
+                    <p>如携带儿童同行，请同时出示儿童护照。团队入住时，每位客人均需提供本人护照。</p>
+                    <div class="tip-box">
+                        <h4>重要提示</h4>
+                        <p>不接受护照复印件或电子版本，必须出示原件。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- 支付相关 -->
         <div class="faq-item" data-category="payment">
-            <div class="faq-question lang-en">
-                <span>What payment methods are accepted at the hotel?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What payment methods are accepted at the hotel?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">酒店接受哪些支付方式？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>酒店接受哪些支付方式？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>We accept the following payment methods:</p>
-                <ul>
-                    <li>International credit cards: Visa, Mastercard, American Express</li>
-                    <li>UnionPay cards (China's national bank card network)</li>
-                    <li>Mobile payment: Alipay (international version available), WeChat Pay (for visitors with Chinese bank accounts)</li>
-                    <li>Cash: Chinese Yuan (CNY/RMB) only (we do not accept foreign currency)</li>
-                </ul>
-                <p>A security deposit (usually one night's room rate) is required upon check-in, which can be paid by credit card (pre-authorization) or cash.</p>
-                <div class="tip-box">
-                    <h4>Currency Tip</h4>
-                    <p>You can exchange foreign currency at banks or the airport. Most ATMs in Chengdu accept international cards for cash withdrawals (CNY only).</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>We accept the following payment methods:</p>
+                    <ul>
+                        <li>International credit cards: Visa, Mastercard, American Express</li>
+                        <li>UnionPay cards (China's national bank card network)</li>
+                        <li>Mobile payment: Alipay (international version available), WeChat Pay (for visitors with Chinese bank accounts)</li>
+                        <li>Cash: Chinese Yuan (CNY/RMB) only (we do not accept foreign currency)</li>
+                    </ul>
+                    <p>A security deposit (usually one night's room rate) is required upon check-in, which can be paid by credit card (pre-authorization) or cash.</p>
+                    <div class="tip-box">
+                        <h4>Currency Tip</h4>
+                        <p>You can exchange foreign currency at banks or the airport. Most ATMs in Chengdu accept international cards for cash withdrawals (CNY only).</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>我们接受以下支付方式：</p>
-                <ul>
-                    <li>国际信用卡：Visa、Mastercard、American Express</li>
-                    <li>银联卡（中国国家银行卡网络）</li>
-                    <li>移动支付：支付宝（支持国际版）、微信支付（需绑定中国银行卡）</li>
-                    <li>现金：仅接受人民币（不接受外币）</li>
-                </ul>
-                <p>入住时需支付押金（通常为一晚房费），可通过信用卡（预授权）或现金支付。</p>
-                <div class="tip-box">
-                    <h4>货币提示</h4>
-                    <p>可在银行或机场兑换外币。成都大部分ATM机支持国际卡取现（仅可取人民币）。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>我们接受以下支付方式：</p>
+                    <ul>
+                        <li>国际信用卡：Visa、Mastercard、American Express</li>
+                        <li>银联卡（中国国家银行卡网络）</li>
+                        <li>移动支付：支付宝（支持国际版）、微信支付（需绑定中国银行卡）</li>
+                        <li>现金：仅接受人民币（不接受外币）</li>
+                    </ul>
+                    <p>入住时需支付押金（通常为一晚房费），可通过信用卡（预授权）或现金支付。</p>
+                    <div class="tip-box">
+                        <h4>货币提示</h4>
+                        <p>可在银行或机场兑换外币。成都大部分ATM机支持国际卡取现（仅可取人民币）。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="payment">
-            <div class="faq-question lang-en">
-                <span>Will I be charged extra fees during my stay?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">Will I be charged extra fees during my stay?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">入住期间会产生额外费用吗？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>入住期间会产生额外费用吗？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>The following services are included in your room rate:</p>
-                <ul>
-                    <li>Free high-speed Wi-Fi</li>
-                    <li>Free bottled water (2 bottles per day)</li>
-                    <li>Free use of gym and laundry facilities</li>
-                    <li>Free luggage storage</li>
-                </ul>
-                <p>Additional charges apply for:</p>
-                <ul>
-                    <li>Breakfast (¥48 per person, payable at front desk)</li>
-                    <li>Room service (service fee applies)</li>
-                    <li>Laundry service (dry cleaning/ironing)</li>
-                    <li>Late check-out (as per hotel policy)</li>
-                    <li>Minibar items (priced individually)</li>
-                </ul>
-                <p>All extra charges will be clearly listed on your final bill at check-out.</p>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>以下服务已包含在房费中：</p>
-                <ul>
-                    <li>免费高速Wi-Fi</li>
-                    <li>免费瓶装水（每天2瓶）</li>
-                    <li>免费使用健身房和洗衣设施</li>
-                    <li>免费行李寄存</li>
-                </ul>
-                <p>以下服务需额外收费：</p>
-                <ul>
-                    <li>早餐（48元/位，前台购买）</li>
-                    <li>客房送餐服务（收取服务费）</li>
-                    <li>洗衣服务（干洗/熨烫）</li>
-                    <li>延迟退房（按酒店政策收费）</li>
-                    <li>迷你吧商品（单独计价）</li>
-                </ul>
-                <p>所有额外费用都会在退房时清晰列在最终账单上。</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>The following services are included in your room rate:</p>
+                    <ul>
+                        <li>Free high-speed Wi-Fi</li>
+                        <li>Free bottled water (2 bottles per day)</li>
+                        <li>Free use of gym and laundry facilities</li>
+                        <li>Free luggage storage</li>
+                    </ul>
+                    <p>Additional charges apply for:</p>
+                    <ul>
+                        <li>Breakfast (¥48 per person, payable at front desk)</li>
+                        <li>Room service (service fee applies)</li>
+                        <li>Laundry service (dry cleaning/ironing)</li>
+                        <li>Late check-out (as per hotel policy)</li>
+                        <li>Minibar items (priced individually)</li>
+                    </ul>
+                    <p>All extra charges will be clearly listed on your final bill at check-out.</p>
+                </div>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>以下服务已包含在房费中：</p>
+                    <ul>
+                        <li>免费高速Wi-Fi</li>
+                        <li>免费瓶装水（每天2瓶）</li>
+                        <li>免费使用健身房和洗衣设施</li>
+                        <li>免费行李寄存</li>
+                    </ul>
+                    <p>以下服务需额外收费：</p>
+                    <ul>
+                        <li>早餐（48元/位，前台购买）</li>
+                        <li>客房送餐服务（收取服务费）</li>
+                        <li>洗衣服务（干洗/熨烫）</li>
+                        <li>延迟退房（按酒店政策收费）</li>
+                        <li>迷你吧商品（单独计价）</li>
+                    </ul>
+                    <p>所有额外费用都会在退房时清晰列在最终账单上。</p>
+                </div>
             </div>
         </div>
 
         <!-- 酒店设施 -->
         <div class="faq-item" data-category="facilities">
-            <div class="faq-question lang-en">
-                <span>Is there English-speaking staff available at the hotel?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">Is there English-speaking staff available at the hotel?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">酒店有会说英语的工作人员吗？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>酒店有会说英语的工作人员吗？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Yes! Our front desk staff (24/7), concierge, and guest relations team all speak fluent English. We also have staff who speak basic Japanese and Korean.</p>
-                <p>If you need assistance with restaurant reservations, tour bookings, or transportation arrangements, our English-speaking concierge can help you during 8:00 AM - 10:00 PM daily.</p>
-                <div class="tip-box">
-                    <h4>Translation Tip</h4>
-                    <p>We provide free translation cards (Chinese-English) for common phrases (e.g., ordering food, asking for directions) at the front desk.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Yes! Our front desk staff (24/7), concierge, and guest relations team all speak fluent English. We also have staff who speak basic Japanese and Korean.</p>
+                    <p>If you need assistance with restaurant reservations, tour bookings, or transportation arrangements, our English-speaking concierge can help you during 8:00 AM - 10:00 PM daily.</p>
+                    <div class="tip-box">
+                        <h4>Translation Tip</h4>
+                        <p>We provide free translation cards (Chinese-English) for common phrases (e.g., ordering food, asking for directions) at the front desk.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>是的！我们的前台工作人员（24小时）、礼宾部和客户关系团队均能流利使用英语。部分员工还会基础日语和韩语。</p>
-                <p>如您需要协助预订餐厅、旅游行程或安排交通，我们的英语礼宾人员可在每日8:00-22:00为您提供帮助。</p>
-                <div class="tip-box">
-                    <h4>翻译提示</h4>
-                    <p>前台提供免费的常用语翻译卡（中英对照），涵盖点餐、问路等场景。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>是的！我们的前台工作人员（24小时）、礼宾部和客户关系团队均能流利使用英语。部分员工还会基础日语和韩语。</p>
+                    <p>如您需要协助预订餐厅、旅游行程或安排交通，我们的英语礼宾人员可在每日8:00-22:00为您提供帮助。</p>
+                    <div class="tip-box">
+                        <h4>翻译提示</h4>
+                        <p>前台提供免费的常用语翻译卡（中英对照），涵盖点餐、问路等场景。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="facilities">
-            <div class="faq-question lang-en">
-                <span>What amenities are available in the guest rooms?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What amenities are available in the guest rooms?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">客房内有哪些便利设施？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>客房内有哪些便利设施？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>All guest rooms include the following amenities:</p>
-                <ul>
-                    <li>Air conditioning (heating/cooling) with individual control</li>
-                    <li>Flat-screen TV with international channels (CNN, BBC, HBO)</li>
-                    <li>Electric kettle, tea/coffee making facilities</li>
-                    <li>Hairdryer, iron and ironing board</li>
-                    <li>Universal power adapters (Type A/C/I) - available upon request at front desk</li>
-                    <li>Private bathroom with shower, complimentary toiletries (shampoo, conditioner, body wash, toothbrush/toothpaste)</li>
-                    <li>Safe deposit box (for valuables)</li>
-                </ul>
-                <p>Please note: Voltage in China is 220V (50Hz). If you need a specific adapter, ask the front desk for free loan.</p>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>所有客房均配备以下设施：</p>
-                <ul>
-                    <li>独立控制的空调（制热/制冷）</li>
-                    <li>平板电视，含国际频道（CNN、BBC、HBO）</li>
-                    <li>电热水壶、茶/咖啡冲泡设备</li>
-                    <li>吹风机、熨斗和熨衣板</li>
-                    <li>万能转换插头（Type A/C/I）- 可向前台免费借用</li>
-                    <li>独立浴室（淋浴），免费洗漱用品（洗发水、护发素、沐浴露、牙刷/牙膏）</li>
-                    <li>保险箱（存放贵重物品）</li>
-                </ul>
-                <p>请注意：中国电压为220V（50Hz）。如需特殊转换插头，可向前台免费借用。</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>All guest rooms include the following amenities:</p>
+                    <ul>
+                        <li>Air conditioning (heating/cooling) with individual control</li>
+                        <li>Flat-screen TV with international channels (CNN, BBC, HBO)</li>
+                        <li>Electric kettle, tea/coffee making facilities</li>
+                        <li>Hairdryer, iron and ironing board</li>
+                        <li>Universal power adapters (Type A/C/I) - available upon request at front desk</li>
+                        <li>Private bathroom with shower, complimentary toiletries (shampoo, conditioner, body wash, toothbrush/toothpaste)</li>
+                        <li>Safe deposit box (for valuables)</li>
+                    </ul>
+                    <p>Please note: Voltage in China is 220V (50Hz). If you need a specific adapter, ask the front desk for free loan.</p>
+                </div>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>所有客房均配备以下设施：</p>
+                    <ul>
+                        <li>独立控制的空调（制热/制冷）</li>
+                        <li>平板电视，含国际频道（CNN、BBC、HBO）</li>
+                        <li>电热水壶、茶/咖啡冲泡设备</li>
+                        <li>吹风机、熨斗和熨衣板</li>
+                        <li>万能转换插头（Type A/C/I）- 可向前台免费借用</li>
+                        <li>独立浴室（淋浴），免费洗漱用品（洗发水、护发素、沐浴露、牙刷/牙膏）</li>
+                        <li>保险箱（存放贵重物品）</li>
+                    </ul>
+                    <p>请注意：中国电压为220V（50Hz）。如需特殊转换插头，可向前台免费借用。</p>
+                </div>
             </div>
         </div>
 
         <!-- 出行交通 -->
         <div class="faq-item" data-category="travel">
-            <div class="faq-question lang-en">
-                <span>How can I get to the airport from the hotel?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">How can I get to the airport from the hotel?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">如何从酒店前往机场？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>如何从酒店前往机场？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>There are several options to get to the airports from our hotel:</p>
-                <ul>
-                    <li><strong>Private Car (Recommended)</strong>: Arranged by hotel - ¥80-100 to Shuangliu Airport (30 mins), ¥200-250 to Tianfu Airport (60 mins). Includes English-speaking driver if requested.</li>
-                    <li><strong>Taxi</strong>: Available at hotel entrance - same price range as private car, but no advance booking needed.</li>
-                    <li><strong>Metro</strong>: Take Line 1 from Tianfu Square to Shuangliu Airport (50 mins, ¥7) or Line 1 to Tianfu Airport (90 mins, ¥16).</li>
-                    <li><strong>Airport Bus</strong>: Bus stop at Jinjiang Hotel (800m from hotel) - ¥30 to Shuangliu Airport, ¥50 to Tianfu Airport.</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>Travel Tip</h4>
-                    <p>Allow extra time during rush hour (7:30-9:30 AM, 5:30-7:30 PM). We recommend arriving at the airport 2 hours before international flights.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>There are several options to get to the airports from our hotel:</p>
+                    <ul>
+                        <li><strong>Private Car (Recommended)</strong>: Arranged by hotel - ¥80-100 to Shuangliu Airport (30 mins), ¥200-250 to Tianfu Airport (60 mins). Includes English-speaking driver if requested.</li>
+                        <li><strong>Taxi</strong>: Available at hotel entrance - same price range as private car, but no advance booking needed.</li>
+                        <li><strong>Metro</strong>: Take Line 1 from Tianfu Square to Shuangliu Airport (50 mins, ¥7) or Line 1 to Tianfu Airport (90 mins, ¥16).</li>
+                        <li><strong>Airport Bus</strong>: Bus stop at Jinjiang Hotel (800m from hotel) - ¥30 to Shuangliu Airport, ¥50 to Tianfu Airport.</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>Travel Tip</h4>
+                        <p>Allow extra time during rush hour (7:30-9:30 AM, 5:30-7:30 PM). We recommend arriving at the airport 2 hours before international flights.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>从酒店前往机场有多种选择：</p>
-                <ul>
-                    <li><strong>专车（推荐）</strong>：酒店协助安排 - 双流机场80-100元（30分钟），天府机场200-250元（60分钟）。可要求配备英语司机。</li>
-                    <li><strong>出租车</strong>：酒店门口可直接乘坐 - 价格与专车相近，无需提前预订。</li>
-                    <li><strong>地铁</strong>：天府广场乘坐1号线至双流机场（50分钟，7元）或1号线换乘至天府机场（90分钟，16元）。</li>
-                    <li><strong>机场大巴</strong>：锦江宾馆站（距酒店800米）乘车 - 双流机场30元，天府机场50元。</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>出行提示</h4>
-                    <p>高峰时段（早7:30-9:30，晚17:30-19:30）请预留额外时间。国际航班建议提前2小时到达机场。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>从酒店前往机场有多种选择：</p>
+                    <ul>
+                        <li><strong>专车（推荐）</strong>：酒店协助安排 - 双流机场80-100元（30分钟），天府机场200-250元（60分钟）。可要求配备英语司机。</li>
+                        <li><strong>出租车</strong>：酒店门口可直接乘坐 - 价格与专车相近，无需提前预订。</li>
+                        <li><strong>地铁</strong>：天府广场乘坐1号线至双流机场（50分钟，7元）或1号线换乘至天府机场（90分钟，16元）。</li>
+                        <li><strong>机场大巴</strong>：锦江宾馆站（距酒店800米）乘车 - 双流机场30元，天府机场50元。</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>出行提示</h4>
+                        <p>高峰时段（早7:30-9:30，晚17:30-19:30）请预留额外时间。国际航班建议提前2小时到达机场。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="travel">
-            <div class="faq-question lang-en">
-                <span>Can I use international ride-hailing apps in Chengdu?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">Can I use international ride-hailing apps in Chengdu?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">在成都可以使用国际打车软件吗？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>在成都可以使用国际打车软件吗？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Uber is not available in China, but Didi Chuxing (China's largest ride-hailing platform) has an English version of their app:</p>
-                <ul>
-                    <li>Download "Didi Express" (English version) from App Store/Google Play</li>
-                    <li>No Chinese phone number required - can register with foreign number</li>
-                    <li>Accepts international credit cards for payment</li>
-                    <li>All driver communications can be in English via the app</li>
-                </ul>
-                <p>Our front desk can help you set up the app and show you how to use it. You can also ask the concierge to call a taxi for you (24/7 service).</p>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>中国暂未提供Uber服务，但滴滴出行（中国最大的打车平台）有英文版本应用：</p>
-                <ul>
-                    <li>从App Store/Google Play下载“Didi Express”（英文版本）</li>
-                    <li>无需中国手机号 - 可使用外国号码注册</li>
-                    <li>支持国际信用卡支付</li>
-                    <li>所有与司机的沟通均可通过应用以英语完成</li>
-                </ul>
-                <p>前台可协助您安装并演示使用方法。也可随时要求礼宾部帮忙叫车（24小时服务）。</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Uber is not available in China, but Didi Chuxing (China's largest ride-hailing platform) has an English version of their app:</p>
+                    <ul>
+                        <li>Download "Didi Express" (English version) from App Store/Google Play</li>
+                        <li>No Chinese phone number required - can register with foreign number</li>
+                        <li>Accepts international credit cards for payment</li>
+                        <li>All driver communications can be in English via the app</li>
+                    </ul>
+                    <p>Our front desk can help you set up the app and show you how to use it. You can also ask the concierge to call a taxi for you (24/7 service).</p>
+                </div>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>中国暂未提供Uber服务，但滴滴出行（中国最大的打车平台）有英文版本应用：</p>
+                    <ul>
+                        <li>从App Store/Google Play下载“Didi Express”（英文版本）</li>
+                        <li>无需中国手机号 - 可使用外国号码注册</li>
+                        <li>支持国际信用卡支付</li>
+                        <li>所有与司机的沟通均可通过应用以英语完成</li>
+                    </ul>
+                    <p>前台可协助您安装并演示使用方法。也可随时要求礼宾部帮忙叫车（24小时服务）。</p>
+                </div>
             </div>
         </div>
 
         <!-- 文化贴士 -->
         <div class="faq-item" data-category="culture">
-            <div class="faq-question lang-en">
-                <span>What cultural customs should I be aware of in Chengdu?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What cultural customs should I be aware of in Chengdu?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">在成都需要注意哪些文化习俗？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>在成都需要注意哪些文化习俗？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Chengdu is a friendly and welcoming city, but here are some cultural tips to help you:</p>
-                <ul>
-                    <li><strong>Eating</strong>: Sichuan food is famously spicy - ask for "wán quán bù là" (no spice at all) or "diǎn là" (little spice) when ordering.</li>
-                    <li><strong>Greetings</strong>: A simple nod or handshake is appropriate for strangers; address people as "Xiānshēng" (Mr.) or "Nǚshì" (Ms.) followed by their last name.</li>
-                    <li><strong>Public Spaces</strong>: Keep your voice down in public places (e.g., metro, restaurants); queueing is expected for buses/attractions.</li>
-                    <li><strong>Gifts</strong>: If invited to a local home, small gifts (e.g., snacks from your country) are appreciated - avoid giving clocks or white flowers (traditional funeral gifts).</li>
-                    <li><strong>Photography</strong>: Always ask permission before taking photos of people (especially elders or monks at temples).</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>Local Etiquette</h4>
-                    <p>It's common to use chopsticks in restaurants - avoid sticking them upright in rice (funeral tradition) or pointing them at people.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Chengdu is a friendly and welcoming city, but here are some cultural tips to help you:</p>
+                    <ul>
+                        <li><strong>Eating</strong>: Sichuan food is famously spicy - ask for "wán quán bù là" (no spice at all) or "diǎn là" (little spice) when ordering.</li>
+                        <li><strong>Greetings</strong>: A simple nod or handshake is appropriate for strangers; address people as "Xiānshēng" (Mr.) or "Nǚshì" (Ms.) followed by their last name.</li>
+                        <li><strong>Public Spaces</strong>: Keep your voice down in public places (e.g., metro, restaurants); queueing is expected for buses/attractions.</li>
+                        <li><strong>Gifts</strong>: If invited to a local home, small gifts (e.g., snacks from your country) are appreciated - avoid giving clocks or white flowers (traditional funeral gifts).</li>
+                        <li><strong>Photography</strong>: Always ask permission before taking photos of people (especially elders or monks at temples).</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>Local Etiquette</h4>
+                        <p>It's common to use chopsticks in restaurants - avoid sticking them upright in rice (funeral tradition) or pointing them at people.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>成都是一座友好包容的城市，但以下文化贴士能帮助您更好地融入：</p>
-                <ul>
-                    <li><strong>饮食</strong>：川菜以麻辣闻名 - 点餐时可要求“完全不辣”或“微辣”。</li>
-                    <li><strong>问候</strong>：与陌生人交往时，简单点头或握手即可；称呼他人时可在姓氏后加“先生”或“女士”。</li>
-                    <li><strong>公共场合</strong>：在地铁、餐厅等公共场所保持低声交谈；乘坐公交/参观景点需排队。</li>
-                    <li><strong>送礼</strong>：如受邀到本地人家中做客，小礼物（如本国特色零食）会受欢迎 - 避免赠送钟表或白花（传统丧葬用品）。</li>
-                    <li><strong>拍照</strong>：拍摄他人（尤其是老人或寺庙僧人）前请先征得同意。</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>本地礼仪</h4>
-                    <p>餐厅用餐普遍使用筷子 - 避免将筷子直立插在米饭中（丧葬习俗）或用筷子指向他人。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>成都是一座友好包容的城市，但以下文化贴士能帮助您更好地融入：</p>
+                    <ul>
+                        <li><strong>饮食</strong>：川菜以麻辣闻名 - 点餐时可要求“完全不辣”或“微辣”。</li>
+                        <li><strong>问候</strong>：与陌生人交往时，简单点头或握手即可；称呼他人时可在姓氏后加“先生”或“女士”。</li>
+                        <li><strong>公共场合</strong>：在地铁、餐厅等公共场所保持低声交谈；乘坐公交/参观景点需排队。</li>
+                        <li><strong>送礼</strong>：如受邀到本地人家中做客，小礼物（如本国特色零食）会受欢迎 - 避免赠送钟表或白花（传统丧葬用品）。</li>
+                        <li><strong>拍照</strong>：拍摄他人（尤其是老人或寺庙僧人）前请先征得同意。</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>本地礼仪</h4>
+                        <p>餐厅用餐普遍使用筷子 - 避免将筷子直立插在米饭中（丧葬习俗）或用筷子指向他人。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="culture">
-            <div class="faq-question lang-en">
-                <span>Is it easy to find vegetarian/halal food in Chengdu?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">Is it easy to find vegetarian/halal food in Chengdu?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">在成都容易找到素食/清真食品吗？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>在成都容易找到素食/清真食品吗？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>Yes! Chengdu has many options for special dietary needs:</p>
-                <ul>
-                    <li><strong>Vegetarian Food</strong>: Over 50 vegetarian restaurants near our hotel (5-15 mins walk), including Buddhist vegetarian restaurants (no garlic/onion) and Western vegetarian cafes.</li>
-                    <li><strong>Halal Food</strong>: The Muslim Quarter (5km from hotel) has over 100 halal restaurants serving beef/noodle dishes - take taxi (¥15) or metro Line 1 (15 mins).</li>
-                    <li><strong>Allergen Information</strong>: Major restaurants can provide ingredient lists (ask for "yào wù chéng fèn biǎo") - our concierge can help translate your dietary restrictions.</li>
-                </ul>
-                <p>Our hotel breakfast also offers vegetarian options (fresh fruits, bread, eggs, porridge) and can accommodate gluten-free requests with 24-hour advance notice.</p>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>是的！成都有很多满足特殊饮食需求的选择：</p>
-                <ul>
-                    <li><strong>素食</strong>：酒店周边5-15分钟步行范围内有50余家素食餐厅，包括佛家素菜馆（无蒜/葱）和西式素食咖啡馆。</li>
-                    <li><strong>清真食品</strong>：回民街（距酒店5公里）有100余家清真餐厅，主营牛肉/面食 - 可打车（15元）或乘坐地铁1号线（15分钟）前往。</li>
-                    <li><strong>过敏原信息</strong>：主流餐厅可提供配料表 - 我们的礼宾部可协助翻译您的饮食禁忌。</li>
-                </ul>
-                <p>酒店早餐也提供素食选择（新鲜水果、面包、鸡蛋、粥），如需无麸质餐食，可提前24小时告知。</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>Yes! Chengdu has many options for special dietary needs:</p>
+                    <ul>
+                        <li><strong>Vegetarian Food</strong>: Over 50 vegetarian restaurants near our hotel (5-15 mins walk), including Buddhist vegetarian restaurants (no garlic/onion) and Western vegetarian cafes.</li>
+                        <li><strong>Halal Food</strong>: The Muslim Quarter (5km from hotel) has over 100 halal restaurants serving beef/noodle dishes - take taxi (¥15) or metro Line 1 (15 mins).</li>
+                        <li><strong>Allergen Information</strong>: Major restaurants can provide ingredient lists (ask for "yào wù chéng fèn biǎo") - our concierge can help translate your dietary restrictions.</li>
+                    </ul>
+                    <p>Our hotel breakfast also offers vegetarian options (fresh fruits, bread, eggs, porridge) and can accommodate gluten-free requests with 24-hour advance notice.</p>
+                </div>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>是的！成都有很多满足特殊饮食需求的选择：</p>
+                    <ul>
+                        <li><strong>素食</strong>：酒店周边5-15分钟步行范围内有50余家素食餐厅，包括佛家素菜馆（无蒜/葱）和西式素食咖啡馆。</li>
+                        <li><strong>清真食品</strong>：回民街（距酒店5公里）有100余家清真餐厅，主营牛肉/面食 - 可打车（15元）或乘坐地铁1号线（15分钟）前往。</li>
+                        <li><strong>过敏原信息</strong>：主流餐厅可提供配料表 - 我们的礼宾部可协助翻译您的饮食禁忌。</li>
+                    </ul>
+                    <p>酒店早餐也提供素食选择（新鲜水果、面包、鸡蛋、粥），如需无麸质餐食，可提前24小时告知。</p>
+                </div>
             </div>
         </div>
 
         <!-- 紧急情况 -->
         <div class="faq-item" data-category="emergency">
-            <div class="faq-question lang-en">
-                <span>What should I do in case of a medical emergency?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What should I do in case of a medical emergency?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">遇到医疗紧急情况该怎么办？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>遇到医疗紧急情况该怎么办？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>In case of medical emergency:</p>
-                <ul>
-                    <li>Call the hotel's 24-hour emergency line: +86 173 8007 0961 (English-speaking staff available)</li>
-                    <li>We have a first-aid kit at the front desk for minor injuries (band-aids, painkillers, antacids)</li>
-                    <li>Our staff can arrange transportation to the nearest international hospital:
-                        <ul>
-                            <li>Chengdu American-Sino Friendship Hospital (10 mins by car, English-speaking doctors)</li>
-                            <li>West China Hospital International Medical Center (20 mins by car, international insurance accepted)</li>
-                        </ul>
-                    </li>
-                    <li>Emergency phone number for ambulance: 120 (we can call on your behalf with English translation)</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>Medical Tip</h4>
-                    <p>Carry your travel insurance documents and a list of your medications (in English/Chinese) at all times. We can store a copy at the front desk for safekeeping.</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>In case of medical emergency:</p>
+                    <ul>
+                        <li>Call the hotel's 24-hour emergency line: +86 173 8007 0961 (English-speaking staff available)</li>
+                        <li>We have a first-aid kit at the front desk for minor injuries (band-aids, painkillers, antacids)</li>
+                        <li>Our staff can arrange transportation to the nearest international hospital:
+                            <ul>
+                                <li>Chengdu American-Sino Friendship Hospital (10 mins by car, English-speaking doctors)</li>
+                                <li>West China Hospital International Medical Center (20 mins by car, international insurance accepted)</li>
+                            </ul>
+                        </li>
+                        <li>Emergency phone number for ambulance: 120 (we can call on your behalf with English translation)</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>Medical Tip</h4>
+                        <p>Carry your travel insurance documents and a list of your medications (in English/Chinese) at all times. We can store a copy at the front desk for safekeeping.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>如遇医疗紧急情况：</p>
-                <ul>
-                    <li>拨打酒店24小时紧急电话：+86 173 8007 0961（有英语工作人员）</li>
-                    <li>前台备有急救包，可处理轻微外伤（创可贴、止痛药、胃药）</li>
-                    <li>工作人员可安排前往最近的国际医院：
-                        <ul>
-                            <li>成都中美友谊医院（车程10分钟，有英语医生）</li>
-                            <li>华西医院国际医疗中心（车程20分钟，接受国际保险）</li>
-                        </ul>
-                    </li>
-                    <li>救护车紧急电话：120（我们可协助拨打并提供英语翻译）</li>
-                </ul>
-                <div class="tip-box">
-                    <h4>医疗提示</h4>
-                    <p>请随身携带旅行保险文件和用药清单（中英双语）。我们可在前台为您保管复印件。</p>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>如遇医疗紧急情况：</p>
+                    <ul>
+                        <li>拨打酒店24小时紧急电话：+86 173 8007 0961（有英语工作人员）</li>
+                        <li>前台备有急救包，可处理轻微外伤（创可贴、止痛药、胃药）</li>
+                        <li>工作人员可安排前往最近的国际医院：
+                            <ul>
+                                <li>成都中美友谊医院（车程10分钟，有英语医生）</li>
+                                <li>华西医院国际医疗中心（车程20分钟，接受国际保险）</li>
+                            </ul>
+                        </li>
+                        <li>救护车紧急电话：120（我们可协助拨打并提供英语翻译）</li>
+                    </ul>
+                    <div class="tip-box">
+                        <h4>医疗提示</h4>
+                        <p>请随身携带旅行保险文件和用药清单（中英双语）。我们可在前台为您保管复印件。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="faq-item" data-category="emergency">
-            <div class="faq-question lang-en">
-                <span>What if I lose my passport or valuables?</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="faq-question-wrapper">
+                <div class="faq-question-text lang-en">What if I lose my passport or valuables?</div>
+                <div class="faq-question-text lang-zh" style="display: none;">如果丢失护照或贵重物品该怎么办？</div>
+                <i class="fas fa-chevron-down faq-question-icon"></i>
             </div>
-            <div class="faq-question lang-zh" style="display: none;">
-                <span>如果丢失护照或贵重物品该怎么办？</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer lang-en">
-                <p>If you lose your passport/valuables:</p>
-                <ul>
-                    <li>Immediately report to the hotel front desk (we have a lost and found register)</li>
-                    <li>For passport loss:
-                        <ul>
-                            <li>We will help you contact your embassy/consulate in Chengdu</li>
-                            <li>Assist with police report (required for passport replacement)</li>
-                            <li>Provide a temporary accommodation certificate for embassy procedures</li>
-                        </ul>
-                    </li>
-                    <li>For valuables loss:
-                        <ul>
-                            <li>We will review CCTV footage (if applicable)</li>
-                            <li>Assist with police report (dial 110 for police)</li>
-                            <li>Provide documentation for insurance claims</li>
-                        </ul>
-                    </li>
-                </ul>
-                <p>We recommend storing passports and valuable items in the in-room safe or hotel safe deposit box (free of charge).</p>
-            </div>
-            <div class="faq-answer lang-zh" style="display: none;">
-                <p>如丢失护照/贵重物品：</p>
-                <ul>
-                    <li>立即向前台报告（我们有失物招领登记）</li>
-                    <li>护照丢失：
-                        <ul>
-                            <li>协助联系您国家驻成都使领馆</li>
-                            <li>协助报警（补办护照需提供报警记录）</li>
-                            <li>提供临时住宿证明，方便使馆办理手续</li>
-                        </ul>
-                    </li>
-                    <li>贵重物品丢失：
-                        <ul>
-                            <li>协助查看监控录像（如适用）</li>
-                            <li>协助报警（报警电话110）</li>
-                            <li>提供保险理赔所需证明文件</li>
-                        </ul>
-                    </li>
-                </ul>
-                <p>建议将护照和贵重物品存放在客房保险箱或酒店免费保管箱中。</p>
+            <div class="faq-answer-wrapper">
+                <div class="faq-answer-content lang-en">
+                    <p>If you lose your passport/valuables:</p>
+                    <ul>
+                        <li>Immediately report to the hotel front desk (we have a lost and found register)</li>
+                        <li>For passport loss:
+                            <ul>
+                                <li>We will help you contact your embassy/consulate in Chengdu</li>
+                                <li>Assist with police report (required for passport replacement)</li>
+                                <li>Provide a temporary accommodation certificate for embassy procedures</li>
+                            </ul>
+                        </li>
+                        <li>For valuables loss:
+                            <ul>
+                                <li>We will review CCTV footage (if applicable)</li>
+                                <li>Assist with police report (dial 110 for police)</li>
+                                <li>Provide documentation for insurance claims</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>We recommend storing passports and valuable items in the in-room safe or hotel safe deposit box (free of charge).</p>
+                </div>
+                <div class="faq-answer-content lang-zh" style="display: none;">
+                    <p>如丢失护照/贵重物品：</p>
+                    <ul>
+                        <li>立即向前台报告（我们有失物招领登记）</li>
+                        <li>护照丢失：
+                            <ul>
+                                <li>协助联系您国家驻成都使领馆</li>
+                                <li>协助报警（补办护照需提供报警记录）</li>
+                                <li>提供临时住宿证明，方便使馆办理手续</li>
+                            </ul>
+                        </li>
+                        <li>贵重物品丢失：
+                            <ul>
+                                <li>协助查看监控录像（如适用）</li>
+                                <li>协助报警（报警电话110）</li>
+                                <li>提供保险理赔所需证明文件</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>建议将护照和贵重物品存放在客房保险箱或酒店免费保管箱中。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -911,94 +909,105 @@
         // 语言切换功能
         const langBtns = document.querySelectorAll('.lang-btn');
         const langElements = document.querySelectorAll('.lang-en, .lang-zh');
+        const categoryBtns = document.querySelectorAll('.category-btn');
 
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 切换按钮状态
-                langBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const lang = btn.getAttribute('data-lang');
-
-                // 切换显示内容
-                langElements.forEach(el => {
-                    if (el.classList.contains(`lang-${lang}`)) {
-                        el.style.display = el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'DIV' || el.tagName === 'SPAN' ? 'block' : 'inline-block';
-                    } else {
-                        el.style.display = 'none';
-                    }
-                });
-
-                // 同步切换分类按钮显示
-                const categoryBtns = document.querySelectorAll('.category-btn');
-                categoryBtns.forEach(btn => {
-                    if (btn.classList.contains(`lang-${lang}`) || !btn.classList.contains('lang-en') && !btn.classList.contains('lang-zh')) {
-                        btn.style.display = 'inline-block';
-                    } else {
-                        btn.style.display = 'none';
-                    }
-                });
+        // 切换语言的核心函数
+        function switchLanguage(targetLang) {
+            // 切换按钮状态
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === targetLang);
             });
-        });
 
-        // FAQ展开/收起功能
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                // 切换当前问题的展开状态
-                question.classList.toggle('active');
-                const answer = question.nextElementSibling || (question.parentNode.querySelector('.faq-answer') || question.nextSibling.nextSibling);
-                answer.classList.toggle('show');
-                
-                // 如果是嵌套的语言元素，同时切换对应语言的答案
-                const lang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
-                const targetAnswer = answer.closest('.faq-answer') || answer;
-                if (targetAnswer.classList.contains(`lang-${lang}`)) {
-                    targetAnswer.classList.toggle('show');
+            // 切换所有语言元素显示
+            langElements.forEach(el => {
+                if (el.classList.contains(`lang-${targetLang}`)) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
                 }
             });
-        });
 
-        // FAQ分类筛选功能
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 切换分类按钮状态
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const category = btn.getAttribute('data-category');
-
-                // 筛选FAQ项目
-                faqItems.forEach(item => {
-                    if (category === 'all' || item.getAttribute('data-category') === category) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // 初始化页面加载完成后的操作
-        window.addEventListener('load', () => {
-            // 确保默认显示英文
-            document.querySelectorAll('.lang-en').forEach(el => {
-                el.style.display = el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'DIV' || el.tagName === 'SPAN' ? 'block' : 'inline-block';
-            });
-            document.querySelectorAll('.lang-zh').forEach(el => {
-                el.style.display = 'none';
-            });
-
-            // 初始化分类按钮显示
-            const categoryBtns = document.querySelectorAll('.category-btn');
+            // 切换分类按钮显示
             categoryBtns.forEach(btn => {
-                if (btn.classList.contains('lang-en') || !btn.classList.contains('lang-en') && !btn.classList.contains('lang-zh')) {
+                if (btn.classList.contains(`lang-${targetLang}`) || !btn.classList.contains('lang-en') && !btn.classList.contains('lang-zh')) {
                     btn.style.display = 'inline-block';
                 } else {
                     btn.style.display = 'none';
                 }
             });
+
+            // 确保当前激活的分类按钮在切换语言后仍保持激活
+            const activeCategory = document.querySelector('.category-btn.active')?.getAttribute('data-category') || 'all';
+            categoryBtns.forEach(btn => {
+                if (btn.getAttribute('data-category') === activeCategory && btn.classList.contains(`lang-${targetLang}`)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // 绑定语言切换按钮事件
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // FAQ展开/收起功能
+        const faqQuestionWrappers = document.querySelectorAll('.faq-question-wrapper');
+        
+        faqQuestionWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                const faqItem = wrapper.closest('.faq-item');
+                faqItem.classList.toggle('expanded');
+            });
+        });
+
+        // FAQ分类筛选功能
+        function filterFAQByCategory(category) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // 重置所有展开状态
+            faqItems.forEach(item => {
+                item.classList.remove('expanded');
+            });
+        }
+
+        // 绑定分类按钮事件
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有分类按钮的激活状态
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // 激活当前按钮
+                btn.classList.add('active');
+                // 获取对应语言的同分类按钮并激活
+                const category = btn.getAttribute('data-category');
+                const targetLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
+                
+                categoryBtns.forEach(b => {
+                    if (b.getAttribute('data-category') === category && b.classList.contains(`lang-${targetLang}`)) {
+                        b.classList.add('active');
+                    }
+                });
+
+                // 筛选FAQ
+                filterFAQByCategory(category);
+            });
+        });
+
+        // 初始化页面
+        window.addEventListener('load', () => {
+            // 默认显示英文
+            switchLanguage('en');
+            // 默认显示所有FAQ
+            filterFAQByCategory('all');
         });
     </script>
 </body>
