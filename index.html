@@ -499,43 +499,11 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // 语言切换功能
-        const langBtns = document.querySelectorAll('.lang-btn');
-        const langElements = document.querySelectorAll('.lang-en, .lang-zh');
-
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 切换按钮状态
-                langBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const lang = btn.getAttribute('data-lang');
-
-                // 切换显示内容
-                langElements.forEach(el => {
-                    if (el.classList.contains(`lang-${lang}`)) {
-                        el.style.display = el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'DIV' ? 'block' : 'inline-block';
-                    } else {
-                        el.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // 初始化页面加载完成后的操作
-        window.addEventListener('load', () => {
-            // 确保默认显示英文
-            document.querySelectorAll('.lang-en').forEach(el => {
-                el.style.display = el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'DIV' ? 'block' : 'inline-block';
-            });
-            document.querySelectorAll('.lang-zh').forEach(el => {
-                el.style.display = 'none';
-            });
-        });
-    </script>
+    <script src="main.js"></script>
+    
 </body>
 </html>
+
 
 
 
