@@ -170,6 +170,48 @@
         .detail-item i {
             color: #2a699d;
         }
+        /* 重要提示样式 */
+        .important-tips {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .tip-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .tip-icon {
+            background-color: #2a699d;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .tip-content h4 {
+            color: #2a699d;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        .tip-content p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
         /* 底部样式 */
         footer {
             background-color: #2a699d;
@@ -245,6 +287,9 @@
             .section-title {
                 font-size: 24px;
             }
+            .important-tips {
+                padding: 20px;
+            }
         }
         @media (max-width: 480px) {
             .header-content {
@@ -260,6 +305,12 @@
             .hero h2 {
                 font-size: 24px;
             }
+            .tip-item {
+                flex-direction: column;
+            }
+            .tip-icon {
+                align-self: flex-start;
+            }
         }
     </style>
     <!-- 引入图标库 -->
@@ -270,7 +321,8 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
+                <!-- 替换为有效亚朵logo链接 -->
+                <img src="https://cdn.atour.com/atourpc/common/images/logo.png" alt="Atour Hotel Logo">
                 <h1>Atour Hotel Tianfu Square</h1>
             </div>
             <div class="lang-switch">
@@ -292,6 +344,100 @@
 
     <!-- 内容区 -->
     <div class="container">
+        <!-- 重要提示区域 -->
+        <h3 class="section-title lang-en">Important Tips</h3>
+        <h3 class="section-title lang-zh" style="display: none;">重要提示</h3>
+        
+        <div class="important-tips">
+            <!-- 快递服务（第一个） -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-box"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Courier Service</h4>
+                    <h4 class="lang-zh" style="display: none;">快递服务</h4>
+                    <p class="lang-en">Our front desk accepts courier packages for all guests. Please provide your room number and name when sending or receiving packages. We will keep your packages safe until pickup.</p>
+                    <p class="lang-zh" style="display: none;">酒店前台可为所有住客代收快递包裹，收发快递时请提供房间号和姓名，我们会妥善保管包裹直至您领取。</p>
+                </div>
+            </div>
+
+            <!-- 洗衣房（第二个） -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-tshirt"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Laundry Room (3rd Floor)</h4>
+                    <h4 class="lang-zh" style="display: none;">洗衣房（3楼）</h4>
+                    <p class="lang-en">The self-service laundry room on the 3rd floor is equipped with washing machines and dryers. Our staff can help collect, deliver, wash and dry your laundry upon request (free of charge).</p>
+                    <p class="lang-zh" style="display: none;">3楼自助洗衣房配备洗衣机和烘干机，如有需要，工作人员可协助收取、送回及清洗烘干衣物（免费服务）。</p>
+                </div>
+            </div>
+
+            <!-- 房间床品购买（第三个新增） -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-bed"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Room Bedding Purchase</h4>
+                    <h4 class="lang-zh" style="display: none;">房间床品购买</h4>
+                    <p class="lang-en">If you like the hotel's bedding (pillows, quilts, bed sheets), you can purchase them at the front desk. We offer the same high-quality bedding used in the rooms for sale.</p>
+                    <p class="lang-zh" style="display: none;">如果您觉得我们酒店的床品（枕头、被子、床单等）不错的话，可以前往前台进行购买，我们提供与客房同款的高品质床品售卖。</p>
+                </div>
+            </div>
+
+            <!-- 亚朵奉茶 -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-leaf"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Atour Tea Giving (Public Welfare Project)</h4>
+                    <h4 class="lang-zh" style="display: none;">亚朵奉茶（公益项目）</h4>
+                    <p class="lang-en">Atour Tea Giving is a public welfare initiative where we provide free hot tea to outdoor workers (cleaners, delivery riders, taxi drivers) year-round. This represents our commitment to social responsibility and care for the community.</p>
+                    <p class="lang-zh" style="display: none;">亚朵奉茶是一项公益项目，我们全年为户外工作者（环卫工人、外卖骑手、出租车司机等）提供免费热茶，体现酒店的社会责任与人文关怀。</p>
+                </div>
+            </div>
+
+            <!-- 深夜服务（更新夜宵内容） -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-moon"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Late Night Service & Supper</h4>
+                    <h4 class="lang-zh" style="display: none;">深夜服务与夜宵</h4>
+                    <p class="lang-en">Our 24-hour front desk provides thoughtful late-night services. Complimentary supper is available from 21:30 PM to 23:00 PM at the hotel lobby for all guests, including porridge with 4 kinds of pickled vegetables, 2 kinds of homemade side dishes, and 2 kinds of steamed dim sums.</p>
+                    <p class="lang-zh" style="display: none;">酒店前台提供24小时贴心服务，每晚21:30至23:00在大堂为住客提供免费夜宵，包含粥品搭配4种配粥酱菜、2种自制小菜，以及粥品和2种蒸点。</p>
+                </div>
+            </div>
+
+            <!-- 房间冰箱（更新为矿泉水和饮料皆免费） -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-snowflake"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Room Refrigerator Items</h4>
+                    <h4 class="lang-zh" style="display: none;">房间冰箱物品</h4>
+                    <p class="lang-en">All mineral water and beverages in the room refrigerator are complimentary (free of charge).</p>
+                    <p class="lang-zh" style="display: none;">房间冰箱内的矿泉水和饮料皆是免费提供的。</p>
+                </div>
+            </div>
+
+            <!-- 饮用水提醒 -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-faucet"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">Drinking Water Reminder</h4>
+                    <h4 class="lang-zh" style="display: none;">饮用水提醒</h4>
+                    <p class="lang-en">Tap water from the faucet is not drinkable and may cause stomach upset or diarrhea. Please use the complimentary bottled water provided in the room or boiled water from the electric kettle.</p>
+                    <p class="lang-zh" style="display: none;">水龙头的自来水不可直接饮用，饮用可能导致肠胃不适或腹泻。请使用房间提供的免费瓶装水或电热水壶烧煮的开水。</p>
+                </div>
+            </div>
+
+            <!-- WiFi密码 -->
+            <div class="tip-item">
+                <div class="tip-icon"><i class="fas fa-wifi"></i></div>
+                <div class="tip-content">
+                    <h4 class="lang-en">WiFi Password</h4>
+                    <h4 class="lang-zh" style="display: none;">WiFi密码</h4>
+                    <p class="lang-en">The high-speed WiFi password for hotel rooms and public areas is the last 6 digits of your passport number (for foreign guests) or ID card number (for Chinese guests).</p>
+                    <p class="lang-zh" style="display: none;">酒店客房及公共区域的高速WiFi密码为您的护照后六位（外籍宾客）或身份证后六位（中国籍宾客）。</p>
+                </div>
+            </div>
+        </div>
+
         <!-- 住宿 -->
         <section class="section">
             <h3 class="section-title lang-en">Accommodation</h3>
@@ -307,10 +453,14 @@
                         <p class="card-text lang-en">Spacious rooms with free Wi-Fi, premium bedding and modern amenities. 24-hour front desk service available.</p>
                         <p class="card-text lang-zh" style="display: none;">宽敞客房配备免费Wi-Fi、优质床品及现代化设施。24小时前台服务随时待命。</p>
                         <div class="card-details">
-                            <div class="detail-item lang-en"><i class="fas fa-wifi"></i> Free high-speed Wi-Fi</div>
-                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-wifi"></i> 免费高速Wi-Fi</div>
+                            <div class="detail-item lang-en"><i class="fas fa-wifi"></i> Free high-speed Wi-Fi (last 6 digits of passport)</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-wifi"></i> 免费高速Wi-Fi（护照后六位）</div>
                             <div class="detail-item lang-en"><i class="fas fa-coffee"></i> Complimentary breakfast (48 RMB/person, purchase at front desk)</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-coffee"></i> 自助早餐（48元/位，前台购买）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-snowflake"></i> Free mineral water and beverages in room refrigerator</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-snowflake"></i> 房间冰箱免费提供矿泉水和饮料</div>
+                            <div class="detail-item lang-en"><i class="fas fa-faucet"></i> Tap water not drinkable - use bottled water</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-faucet"></i> 自来水不可饮用，请使用瓶装水</div>
                         </div>
                     </div>
                 </div>
@@ -321,15 +471,19 @@
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-concierge-bell"></i> Hotel Services</h4>
                         <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-concierge-bell"></i> 酒店服务</h4>
-                        <p class="card-text lang-en">Laundry service, luggage storage, business center and gym. Our staff speak English and can assist with tour bookings, taxi arrangements and local travel advice.</p>
-                        <p class="card-text lang-zh" style="display: none;">洗衣服务、行李寄存、商务中心及健身房。员工可提供英语服务，协助预订旅游行程、安排出租车及提供本地出行建议。</p>
+                        <p class="card-text lang-en">Laundry service, luggage storage, business center and gym. Our staff speak English and can assist with tour bookings, taxi arrangements and local travel advice. Bedding purchase service is available at front desk.</p>
+                        <p class="card-text lang-zh" style="display: none;">洗衣服务、行李寄存、商务中心及健身房。员工可提供英语服务，协助预订旅游行程、安排出租车及提供本地出行建议。前台提供床品购买服务。</p>
                         <div class="card-details">
-                            <div class="detail-item lang-en"><i class="fas fa-tshirt"></i> Free laundry service (3rd floor)</div>
-                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-tshirt"></i> 免费洗衣服务（3楼）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-tshirt"></i> Self-service laundry (3rd floor) with staff assistance</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-tshirt"></i> 自助洗衣房（3楼），可协助取送洗烘</div>
                             <div class="detail-item lang-en"><i class="fas fa-suitcase"></i> Free luggage storage (check-in/out flexible)</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-suitcase"></i> 免费行李寄存（灵活入住/退房）</div>
                             <div class="detail-item lang-en"><i class="fas fa-dumbbell"></i> 24-hour gym access (9th floor)</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-dumbbell"></i> 24小时健身房（9楼）</div>
+                            <div class="detail-item lang-en"><i class="fas fa-box"></i> Courier package acceptance at front desk</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-box"></i> 前台可代收快递包裹</div>
+                            <div class="detail-item lang-en"><i class="fas fa-moon"></i> Complimentary supper (21:30-23:00) with porridge, 4 pickled vegetables, 2 homemade side dishes and 2 steamed dim sums</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-moon"></i> 免费夜宵（21:30-23:00）含粥品、4种配粥酱菜、2种自制小菜、2种蒸点</div>
                         </div>
                     </div>
                 </div>
@@ -385,7 +539,6 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
-                        <!-- 替换为成都公交车图片 -->
                         <img src="https://picsum.photos/id/1081/800/600" alt="Chengdu Bus">
                     </div>
                     <div class="card-content">
@@ -405,7 +558,6 @@
                 </div>
                 <div class="card">
                     <div class="card-img">
-                        <!-- 替换为滴滴出行相关图片 -->
                         <img src="https://picsum.photos/id/1068/800/600" alt="Didi Taxi Chengdu">
                     </div>
                     <div class="card-content">
@@ -479,7 +631,8 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
+                        <!-- 替换为有效亚朵logo链接 -->
+                        <img src="https://cdn.atour.com/atourpc/common/images/logo.png" alt="Atour Hotel Logo">
                         <h3>Atour Hotel Tianfu Square</h3>
                     </div>
                     <p class="lang-en">Your home away from home in the heart of Chengdu. Located at 36 Renmin East Road, our hotel offers easy access to all of Chengdu's top attractions and amenities.</p>
@@ -488,12 +641,22 @@
                 <div class="footer-contact">
                     <h4 class="lang-en">Contact Us</h4>
                     <h4 class="lang-zh" style="display: none;">联系我们</h4>
-                    <!-- 高德地图导航链接 -->
+                    <!-- 多地图导航链接 -->
                     <div class="contact-item lang-en"><i class="fas fa-map-marker-alt"></i> 
-                        <a href="https://amap.com/place/B0FFH678XV" target="_blank">36 Renmin East Road, Jinjiang District, Chengdu</a>
+                        <div>
+                            <a href="https://maps.google.com/maps?q=36+Renmin+East+Road,+Jinjiang+District,+Chengdu,+Sichuan,+China" target="_blank">Google Maps</a> | 
+                            <a href="https://map.baidu.com/mobile/webapp/search/index/qt=s&wd=成都市锦江区人民东路36号亚朵酒店" target="_blank">Baidu Maps</a> | 
+                            <a href="https://amap.com/place/B0FFH678XV" target="_blank">Amap</a>
+                            <br>36 Renmin East Road, Jinjiang District, Chengdu
+                        </div>
                     </div>
                     <div class="contact-item lang-zh" style="display: none;"><i class="fas fa-map-marker-alt"></i> 
-                        <a href="https://amap.com/place/B0FFH678XV" target="_blank">中国成都市锦江区人民东路36号</a>
+                        <div>
+                            <a href="https://maps.google.com/maps?q=36+Renmin+East+Road,+Jinjiang+District,+Chengdu,+Sichuan,+China" target="_blank">谷歌地图</a> | 
+                            <a href="https://map.baidu.com/mobile/webapp/search/index/qt=s&wd=成都市锦江区人民东路36号亚朵酒店" target="_blank">百度地图</a> | 
+                            <a href="https://amap.com/place/B0FFH678XV" target="_blank">高德地图</a>
+                            <br>成都市锦江区人民东路36号
+                        </div>
                     </div>
                     <div class="contact-item"><i class="fas fa-phone"></i> +86 173 8007 0961</div>
                     <div class="contact-item"><i class="fas fa-envelope"></i> tianfu@atourhotel-chengdu.com</div>
@@ -551,9 +714,5 @@
             });
         });
     </script>
-    
 </body>
 </html>
-
-
-
