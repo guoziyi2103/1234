@@ -21,7 +21,7 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        /* 头部样式 - 与主页面保持一致 */
+        /* 头部样式 - 移除logo图片相关样式 */
         header {
             background-color: #fff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -39,9 +39,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .logo img {
-            height: 40px;
         }
         .logo h1 {
             font-size: 22px;
@@ -232,7 +229,7 @@
             font-weight: bold;
             margin: 10px 0;
         }
-        /* 底部样式 - 与主页面保持一致 */
+        /* 底部样式 - 移除logo图片相关样式 */
         footer {
             background-color: #2a699d;
             color: #fff;
@@ -248,9 +245,6 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
-        }
-        .footer-logo img {
-            height: 35px;
         }
         .footer-logo h3 {
             font-size: 18px;
@@ -330,11 +324,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 头部 -->
+    <!-- 头部 - 删除logo图片 -->
     <header>
         <div class="container header-content">
             <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
                 <h1 class="lang-en">Atour Hotel Tianfu Square</h1>
                 <h1 class="lang-zh" style="display: none;">天府广场亚朵酒店</h1>
             </div>
@@ -517,7 +510,7 @@
             </div>
         </div>
 
-        <!-- 酒店设施 -->
+        <!-- 酒店设施 - 修改翻译卡为多语言服务提示 -->
         <div class="faq-item" data-category="facilities">
             <div class="faq-question-wrapper">
                 <div class="faq-question-text lang-en">Is there English-speaking staff available at the hotel?</div>
@@ -529,21 +522,22 @@
                     <p>Yes! Our front desk staff (24/7), concierge, and guest relations team all speak fluent English. We also have staff who speak basic Japanese and Korean.</p>
                     <p>If you need assistance with restaurant reservations, tour bookings, or transportation arrangements, our English-speaking concierge can help you during 8:00 AM - 10:00 PM daily.</p>
                     <div class="tip-box">
-                        <h4>Translation Tip</h4>
-                        <p>We provide free translation cards (Chinese-English) for common phrases (e.g., ordering food, asking for directions) at the front desk.</p>
+                        <h4>Multilingual Service Tip</h4>
+                        <p>Our hotel provides 24/7 multilingual hotline service, and we can arrange on-site translation services for major languages upon request.</p>
                     </div>
                 </div>
                 <div class="faq-answer-content lang-zh" style="display: none;">
                     <p>是的！我们的前台工作人员（24小时）、礼宾部和客户关系团队均能流利使用英语。部分员工还会基础日语和韩语。</p>
                     <p>如您需要协助预订餐厅、旅游行程或安排交通，我们的英语礼宾人员可在每日8:00-22:00为您提供帮助。</p>
                     <div class="tip-box">
-                        <h4>翻译提示</h4>
-                        <p>前台提供免费的常用语翻译卡（中英对照），涵盖点餐、问路等场景。</p>
+                        <h4>多语言服务提示</h4>
+                        <p>酒店提供24小时多语言热线服务，可根据需求安排主要语种的现场翻译服务。</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 酒店设施 - 修改为卫生间干湿分离 -->
         <div class="faq-item" data-category="facilities">
             <div class="faq-question-wrapper">
                 <div class="faq-question-text lang-en">What amenities are available in the guest rooms?</div>
@@ -559,7 +553,7 @@
                         <li>Electric kettle, tea/coffee making facilities</li>
                         <li>Hairdryer (Iron and ironing board are available at the 24-hour laundry room on the 3rd floor)</li>
                         <li>Universal power adapters (Type A/C/I) - available upon request at front desk</li>
-                        <li>Private bathroom with shower, complimentary toiletries (shampoo, conditioner, body wash, toothbrush/toothpaste)</li>
+                        <li>Wet and dry separated bathroom with shower, complimentary toiletries (shampoo, conditioner, body wash, toothbrush/toothpaste)</li>
                     </ul>
                     <p>Please note: Voltage in China is 220V (50Hz). If you need a specific adapter, ask the front desk for free loan.</p>
                     <div class="tip-box">
@@ -575,7 +569,7 @@
                         <li>电热水壶、茶/咖啡冲泡设备</li>
                         <li>吹风机（熨斗和熨衣板可在3楼24小时洗衣房使用）</li>
                         <li>万能转换插头（Type A/C/I）- 可向前台免费借用</li>
-                        <li>独立浴室（淋浴），免费洗漱用品（洗发水、护发素、沐浴露、牙刷/牙膏）</li>
+                        <li>卫生间干湿分离设计，配备淋浴，免费洗漱用品（洗发水、护发素、沐浴露、牙刷/牙膏）</li>
                     </ul>
                     <p>请注意：中国电压为220V（50Hz）。如需特殊转换插头，可向前台免费借用。</p>
                     <div class="tip-box">
@@ -862,13 +856,12 @@
         </div>
     </section>
 
-    <!-- 底部 -->
+    <!-- 底部 - 删除logo图片 -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Atour_Hotel_Logo.svg/1200px-Atour_Hotel_Logo.svg.png" alt="Atour Hotel Logo">
                         <h3 class="lang-en">Atour Hotel Tianfu Square</h3>
                         <h3 class="lang-zh" style="display: none;">天府广场亚朵酒店</h3>
                     </div>
