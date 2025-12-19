@@ -126,11 +126,15 @@
             height: 200px;
             overflow: hidden;
         }
+        /* 图片懒加载优化 */
         .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            /* 优化图片加载 */
+            image-rendering: auto;
+            will-change: transform;
         }
         .card:hover .card-img img {
             transform: scale(1.05);
@@ -402,25 +406,14 @@
                 </div>
             </div>
 
-            <!-- 房间冰箱（更新为矿泉水和饮料皆免费） -->
+            <!-- 房间冰箱（更新为矿泉水和饮料皆免费 + 几木房型提示） -->
             <div class="tip-item">
                 <div class="tip-icon"><i class="fas fa-snowflake"></i></div>
                 <div class="tip-content">
                     <h4 class="lang-en">Room Refrigerator Items</h4>
                     <h4 class="lang-zh" style="display: none;">房间冰箱物品</h4>
-                    <p class="lang-en">All mineral water and beverages in the room refrigerator are complimentary (free of charge).</p>
-                    <p class="lang-zh" style="display: none;">房间冰箱内的矿泉水和饮料皆是免费提供的。</p>
-                </div>
-            </div>
-
-            <!-- 饮用水提醒 -->
-            <div class="tip-item">
-                <div class="tip-icon"><i class="fas fa-faucet"></i></div>
-                <div class="tip-content">
-                    <h4 class="lang-en">Drinking Water Reminder</h4>
-                    <h4 class="lang-zh" style="display: none;">饮用水提醒</h4>
-                    <p class="lang-en">Tap water from the faucet is not drinkable and may cause stomach upset or diarrhea. Please use the complimentary bottled water provided in the room or boiled water from the electric kettle.</p>
-                    <p class="lang-zh" style="display: none;">水龙头的自来水不可直接饮用，饮用可能导致肠胃不适或腹泻。请使用房间提供的免费瓶装水或电热水壶烧煮的开水。</p>
+                    <p class="lang-en">All mineral water and beverages in the room refrigerator are complimentary (free of charge). <strong>Note: Only Jimu rooms are equipped with refrigerators.</strong></p>
+                    <p class="lang-zh" style="display: none;">房间冰箱内的矿泉水和饮料皆是免费提供的。<strong>注：只有几木房型才配备有冰箱。</strong></p>
                 </div>
             </div>
 
@@ -443,7 +436,8 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/rooms.jpg" alt="Atour Hotel Room Chengdu">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/1048/800/600" alt="Atour Hotel Room Chengdu" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-bed"></i> Comfortable Rooms</h4>
@@ -455,8 +449,8 @@
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-wifi"></i> 免费高速Wi-Fi（护照后六位）</div>
                             <div class="detail-item lang-en"><i class="fas fa-coffee"></i> Complimentary breakfast (48 RMB/person, purchase at front desk)</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-coffee"></i> 自助早餐（48元/位，前台购买）</div>
-                            <div class="detail-item lang-en"><i class="fas fa-snowflake"></i> Free mineral water and beverages in room refrigerator</div>
-                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-snowflake"></i> 房间冰箱免费提供矿泉水和饮料</div>
+                            <div class="detail-item lang-en"><i class="fas fa-snowflake"></i> Free mineral water and beverages in room refrigerator (Jimu rooms only)</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-snowflake"></i> 房间冰箱免费提供矿泉水和饮料（仅限几木房型）</div>
                             <div class="detail-item lang-en"><i class="fas fa-faucet"></i> Tap water not drinkable - use bottled water</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-faucet"></i> 自来水不可饮用，请使用瓶装水</div>
                         </div>
@@ -464,7 +458,8 @@
                 </div>
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/fontdesk.png" alt="Atour Hotel Services Chengdu">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/287/800/600" alt="Atour Hotel Services Chengdu" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-concierge-bell"></i> Hotel Services</h4>
@@ -495,22 +490,23 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/eating.jpg" alt="Chengdu Breakfast Atour Hotel">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/292/800/600" alt="Chengdu Breakfast Atour Hotel" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-utensils"></i> Hotel Breakfast</h4>
                         <h4 class="card-title lang-zh" style="display: none;"><i class="fas fa-utensils"></i> 酒店早餐</h4>
-                        <p class="card-text lang-en">International buffet. Fresh fruits, coffee, tea and Western options available. Served 7:00-10:30.</p>
-                        <p class="card-text lang-zh" style="display: none;">国际自助早餐，搭配新鲜水果、咖啡、茶及西式餐点，供应时间7:00-10:30。</p>
+                        <p class="card-text lang-en">International buffet. Fresh fruits, coffee, tea and Western options available.</p>
+                        <p class="card-text lang-zh" style="display: none;">国际自助早餐，搭配新鲜水果、咖啡、茶及西式餐点。</p>
                         <div class="card-details">
-                            <div class="detail-item lang-en"><i class="fas fa-clock"></i> 7:00 - 10:30 AM</div>
-                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-clock"></i> 上午7:00 - 10:30</div>
+                            <div class="detail-item lang-en"><i class="fas fa-clock"></i> Weekdays: 7:00 - 10:30 AM | Weekends & Holidays: 7:00 - 11:00 AM</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-clock"></i> 工作日：7:00 - 10:30 | 周六周日及节假日：7:00 - 11:00</div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-img">
-                        <img src="https://picsum.photos/id/431/800/600" alt="Chengdu Local Restaurants">
+                        <img src="https://picsum.photos/id/431/800/600" alt="Chengdu Local Restaurants" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-map-marker-alt"></i> Nearby Eateries</h4>
@@ -537,7 +533,8 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/bus.jpg" alt="Chengdu Bus">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/1070/800/600" alt="Chengdu Bus" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-subway"></i> Public Transport</h4>
@@ -556,7 +553,8 @@
                 </div>
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/taxi.jpg" alt="Didi Taxi Chengdu">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/1072/800/600" alt="Didi Taxi Chengdu" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-car"></i> Ride & Taxi</h4>
@@ -583,7 +581,8 @@
             <div class="cards">
                 <div class="card">
                     <div class="card-img">
-                        <img src="../img/square.jpg" alt="Chengdu Cultural Sites">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/1036/800/600" alt="Chengdu Cultural Sites" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-landmark"></i> Cultural Sites</h4>
@@ -597,12 +596,15 @@
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-ticket-alt"></i> 熊猫基地：55元，四川博物院：免费</div>
                             <div class="detail-item lang-en"><i class="fas fa-paw"></i> Panda Base best at 8-10 AM</div>
                             <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-paw"></i> 熊猫基地最佳参观时间8-10点</div>
+                            <div class="detail-item lang-en"><i class="fas fa-info-circle"></i> <strong>Note:</strong> Some attraction tickets need to be booked 3-7 days in advance</div>
+                            <div class="detail-item lang-zh" style="display: none;"><i class="fas fa-info-circle"></i> <strong>温馨提示：</strong>一些景点门票需要提前3-7天预约</div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-img">
-                        <img src="img/chunxiroad.jpg" alt="Chengdu Shopping Leisure">
+                        <!-- 替换为picsum图片并添加懒加载 -->
+                        <img src="https://picsum.photos/id/1067/800/600" alt="Chengdu Shopping Leisure" loading="lazy">
                     </div>
                     <div class="card-content">
                         <h4 class="card-title lang-en"><i class="fas fa-shopping-bag"></i> Shopping & Leisure</h4>
@@ -712,14 +714,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
